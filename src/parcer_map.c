@@ -30,7 +30,7 @@ void	create_map(t_params *p)
 	int	i;
 	t_list	*list_elem;
 	
-	printf("create map...\n");
+	printf("Create map...\n");
 	p->w_map += 2;
 	p->h_map += 2;
 	p->map = malloc(sizeof(*p->map) * p->h_map);
@@ -69,7 +69,10 @@ void	check_field(t_params *p)
 					|| !p->map[i - 1][j] || p->map[i - 1][j] == ' '
 					|| !p->map[i][j + 1] || p->map[i][j + 1] == ' '
 					|| !p->map[i][j - 1] || p->map[i][j - 1] == ' '))
+			{
+				printf("[%d,%d] %s \n", i, j, p->map[i] + 2);	
 				ft_raise_error("Hole in the field\n");
+			}
 		}
 	}
 }

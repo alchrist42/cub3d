@@ -80,7 +80,7 @@ void	get_texture(char *s, t_params *p)
 	else if (!ft_strncmp(s, "EA ", 3))
 		p->t_ea = (s + 3);
 	else if (!ft_strncmp(s, "S ", 2))
-		p->t_s = (s + 2);
+		p->t_sp = (s + 2);
 	else
 		ft_raise_error("Impossible error!\n");
 	s[2] = 0;
