@@ -7,7 +7,9 @@ SRCS_FILES	= 	main.c \
 				parcer_helpers.c \
 				raise_error.c \
 				window.c \
+				hooks.c \
 				img_helpers.c \
+				active_buttons.c \
 				gnl/get_next_line.c \
 				gnl/get_next_line_utils.c \
 

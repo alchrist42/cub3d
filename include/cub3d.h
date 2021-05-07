@@ -13,25 +13,27 @@
 # include "mlx.h"
 # include "get_next_line.h"
 
-// # define DEBUG 1
+# define DEBUG 1
 
-// # define KEY_S 1
-// # define KEY_A 0
-// # define KEY_D 2
-// # define KEY_W 13
+# define KEY_W 13
+# define KEY_S 1
+# define KEY_A 0
+# define KEY_D 2
+# define KEY_UP 126
+# define KEY_DW 125
+# define KEY_L 123
+# define KEY_R 124
 
-// # define KEY_UP 126
-// # define KEY_DW 125
-// # define KEY_L 123
-// # define KEY_R 124
-
-// # define KEY_ESC 53
+# define KEY_ESC 53
 
 typedef struct	s_krd
 {
 	int	x;
 	int	y;
 	int	z;
+	int x1;
+	int y1;
+	int	z1;
 }	t_krd;
 
 typedef struct s_params
@@ -68,6 +70,11 @@ typedef struct	s_data {
 	int		bpp;
 	int		llen;
 	int		end;
+	t_params *params;
+	float	x;
+	float	y;
+	bool	btn_w;
+	bool	btn_s;
 }				t_data;
 
 void	ft_raise_error(char *s);
@@ -92,10 +99,24 @@ void	check_line_map(char *s, t_params *p);
 void	create_map(t_params *p);
 void	check_field(t_params *p);
 
-void	create_window(t_params *p);
-int		close_win(int keycode, t_data *img);
+// window.c
+void	create_window(t_data *img, t_params *p);
+void	close_win(t_data *img);
 
+// img_helpers.c
+void	draw_mmap(t_params *p, t_data	*img);
 int		create_trgb(int t, int r, int g, int b);
 void	correct_resolution(t_data *img, t_params *p);
+int 	prepare_frame(t_data *img);
+void	draw_player(t_params *p, t_data *img);
+
+// active_buttons.c
+int		press_button(int keycode, t_data *img);
+int		release_button(int keycode, t_data *img);
+
+// hooks.c
+void	run_loop_game(t_data *img);
+int		main_game(t_data *img);
+void	change_position(t_data *img, t_params *p);
 
 #endif

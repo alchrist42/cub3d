@@ -1,59 +1,47 @@
 #include "cub3d.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	create_window(t_data *img, t_params *p)
 {
-	char	*dst;
-
-	dst = data->addr + (y * data->llen + x * (data->bpp / 8));
-	*(unsigned int*)dst = color;
-}
-
-void draw_mmap(t_params *p, t_data	*img)
-{
-	int x;
-	int	y;
-	char ch;
-
-	x = 0;
-	while (x*3 < p->res_y)
-	{
-		y = 0;
-		while (y*2 < p->res_x)
-		{
-			ch = p->map[x*3 * p->h_map / p->res_y][y*2 * p->w_map / p->res_x];
-			if (ch == '1')
-				my_mlx_pixel_put(img, y, x, 0x0FFF00FF);
-			else if (char_in_str(ch, "NEWS"))
-				my_mlx_pixel_put(img, y, x, 0x0F009F00);
-			else if (char_in_str(ch, "2"))
-				my_mlx_pixel_put(img, y, x, 0x0F800000);
-			y++;
-		}
-		x++;
-	}
-	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
-}
-
-
-
-void	create_window(t_params *p)
-{
-	t_data	img;
-
-	img.mlx = mlx_init();
-	correct_resolution(&img, p);
-	img.win = mlx_new_window(img.mlx, p->res_x, p->res_y, "Cub3D");
-	img.img = mlx_new_image(img.mlx, p->res_x, p->res_y);
-	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.llen, &img.end);
-	draw_mmap(p, &img);
-	mlx_hook(img.win, 2, 1L<<0, close_win, &img);
+	img->mlx = mlx_init();
+	correct_resolution(img, p);
+	img->win = mlx_new_window(img->mlx, p->res_x, p->res_y, "Cub3D");
+	img->img = mlx_new_image(img->mlx, p->res_x, p->res_y);
+	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->llen, &img->end);
+	printf("Bpp = %i, llen = %i, endian = %i\n", img->bpp, img->llen, img->end);
 	
-	mlx_loop(img.mlx);
+	// inicialize other params?
+	img->params = p;
+	img->x = p->plr->x + 0.5;
+	img->y = p->plr->y + 0.5;
+	// draw_mmap(p, img);
 }
 
-int	close_win(int keycode, t_data *img)
+
+/*
+**	@brief	closes window and stop program
+**	
+**	@param	img		the mlx instance
+*/
+void	close_win(t_data *img)
 {
-	(void)keycode;
-	mlx_destroy_window(img->mlx, img->win);
-	exit (0);
+		mlx_destroy_window(img->mlx, img->win);
+		exit (0);
+}
+
+
+/*
+**	@brief changes resolution if it's bigger than the display resolution 
+**	
+**	@param	img		the mlx instance
+**	@param	p		pointer to structure of parameters
+**	@return	int		has no return value
+*/
+void	correct_resolution(t_data *img, t_params *p)
+{
+	int	x;
+	int	y;
+	
+	mlx_get_screen_size(img->mlx, &x, &y);
+	p->res_x = ft_min(x, p->res_x);
+	p->res_y = ft_min(y, p->res_y);
 }
