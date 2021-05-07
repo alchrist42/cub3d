@@ -1,5 +1,14 @@
 #include "cub3d.h"
 
+/*
+**	@brief	runs different check for file with parametrs and map. 
+**			Create map from file
+**	
+**	@param	argc	number of arguments
+**	@param	argv	array of arguments
+**	@param	p		pointer to structure to save different parametrs from file
+**	@return	int		always zero now
+*/
 int		parcer(int argc, char **argv, t_params *p)
 {
 	int	fd;
@@ -18,6 +27,14 @@ int		parcer(int argc, char **argv, t_params *p)
 	return (0);
 }
 
+/*
+**	@brief	checks right number of arguments and their format
+**	
+**	@param	argc		number of arguments
+**	@param	argv		array of arguments
+**	@param	p			pointer to structure to save different parametrs
+**	@return	int			file desciptor
+*/
 int		parsing_args(int argc, char **argv, t_params *p)
 {
 	int	fd;
@@ -43,6 +60,11 @@ int		parsing_args(int argc, char **argv, t_params *p)
 	return (fd);
 }
 
+/*
+**	@brief	inicialise structure for parametrs
+**	
+**	@param	p	pointer to structure to save different parametrs from file
+*/
 void	inicialise_params(t_params *p)
 {
 	p->got_cel = false;
@@ -59,6 +81,12 @@ void	inicialise_params(t_params *p)
 	p->plr->z = 0;
 }
 
+/*
+**	@brief	reads line by line from file and runs parsing for each
+**	
+**	@param	fd		file descriptor
+**	@param	p		pointer to structure to save different parametrs
+*/
 void	parsing_params(int fd, t_params *p)
 {
 	char	*line;
@@ -85,6 +113,12 @@ void	parsing_params(int fd, t_params *p)
 	}
 }
 
+/*
+**	@brief	check first few symbols in line and runs hundlers
+**	
+**	@param	s		pointer to string
+**	@param	p		pointer to structure to save different parametrs
+*/
 void	parsing_line(char *s, t_params *p)
 {
 	if (!ft_strncmp(s, "R ", 2))

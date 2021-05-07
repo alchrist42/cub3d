@@ -13,7 +13,19 @@
 # include "mlx.h"
 # include "get_next_line.h"
 
-# define DEBUG 1
+// # define DEBUG 1
+
+// # define KEY_S 1
+// # define KEY_A 0
+// # define KEY_D 2
+// # define KEY_W 13
+
+// # define KEY_UP 126
+// # define KEY_DW 125
+// # define KEY_L 123
+// # define KEY_R 124
+
+// # define KEY_ESC 53
 
 typedef struct	s_krd
 {
@@ -48,7 +60,18 @@ typedef struct s_params
 	bool	save;
 }	t_params;
 
+typedef struct	s_data {
+	void	*mlx;
+	void	*win;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		llen;
+	int		end;
+}				t_data;
+
 void	ft_raise_error(char *s);
+
 int		ft_arrlen(char **arr);
 int		ft_min(int a, int b);
 int		only_digits(char *s);
@@ -69,6 +92,10 @@ void	check_line_map(char *s, t_params *p);
 void	create_map(t_params *p);
 void	check_field(t_params *p);
 
-int		create_window(t_params *p);
+void	create_window(t_params *p);
+int		close_win(int keycode, t_data *img);
+
+int		create_trgb(int t, int r, int g, int b);
+void	correct_resolution(t_data *img, t_params *p);
 
 #endif

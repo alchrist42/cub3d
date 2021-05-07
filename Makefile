@@ -4,8 +4,10 @@ SRCS_FILES	= 	main.c \
 				parcer.c \
 				parcer_map.c \
 				parcer_lines.c \
+				parcer_helpers.c \
 				raise_error.c \
 				window.c \
+				img_helpers.c \
 				gnl/get_next_line.c \
 				gnl/get_next_line_utils.c \
 
@@ -16,7 +18,7 @@ HEADER		=	include/cub3d.h
 SRCS		= 	$(addprefix $(SRCS_FOLDER),$(SRCS_FILES))
 OBJS		=	$(patsubst %.c,%.o,$(SRCS))
 
-INCLUDE		=	-I./include -I./src/libft/ -I./src/gnl/ -I./src/mlx/
+INCLUDE		=	-I./include -I./src/libft/ -I./src/gnl/ -I./src/mlx_mms/
 
 CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror
@@ -32,7 +34,7 @@ all:		$(NAME)
 
 %.o:		%.c
 			$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
-
+			# $(CC) $(INCLUDE) -c $< -o $@		
 
 $(NAME):	$(OBJS) $(HEADER)
 			$(MAKE) -C $(dir $(MLX))

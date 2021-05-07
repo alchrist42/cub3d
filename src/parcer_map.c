@@ -1,5 +1,11 @@
 #include "cub3d.h"
 
+/*
+**	@brief	checks line of map for bad charaters and puts it to list structure
+**	
+**	@param	s		pointer to string
+**	@param	p		pointer to structure with parametrs
+*/
 void	check_line_map(char *s, t_params *p)
 {
 	int	i;
@@ -25,12 +31,16 @@ void	check_line_map(char *s, t_params *p)
 	ft_lstadd_back(&p->lst_map, ft_lstnew(ft_strdup(s)));
 }
 
+/*
+**	@brief	Create a map object from list structure
+**	
+**	@param	p		pointer to structure with parametrs
+*/
 void	create_map(t_params *p)
 {
 	int	i;
 	t_list	*list_elem;
 	
-	printf("Create map...\n");
 	p->w_map += 2;
 	p->h_map += 2;
 	p->map = malloc(sizeof(*p->map) * p->h_map);
@@ -53,6 +63,11 @@ void	create_map(t_params *p)
 	ft_lstclear(&p->lst_map, free);
 }
 
+/*
+**	@brief	searches for unenclosed areas on the map
+**	
+**	@param	p		pointer to structure with parametrs
+*/
 void	check_field(t_params *p)
 {
 	int	i;
