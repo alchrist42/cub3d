@@ -20,10 +20,10 @@ void	check_line_map(char *s, t_params *p)
 			ft_raise_error("Bad character in the map\n");
 		if (char_in_str(s[i], "NEWS"))
 		{
-			if (p->plr->x != -1)
+			if (p->plr_x)
 				ft_raise_error("Double player position in the map");
-			p->plr->x = p->h_map + 1;
-			p->plr->y = i + 1;
+			p->plr_y = p->h_map + 1;
+			p->plr_x = i + 1;
 		}
 		i++;
 	}

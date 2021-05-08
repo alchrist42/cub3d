@@ -32,40 +32,43 @@ void	draw_mmap(t_params *p, t_data	*img)
 	while (x*3 < p->res_y)
 	{
 		y = 0;
-		while (y*2 < p->res_x)
+		while (y * 2 < p->res_x)
 		{
-			ch = p->map[x*3 * p->h_map / p->res_y][y*2 * p->w_map / p->res_x];
+			ch = p->map[x*3 * p->h_map / p->res_y][y * 2 * p->w_map / p->res_x];
 			if (ch == '1')
 				my_mlx_pixel_put(img, y, x, 0x00AF80FF);
 			// else if (char_in_str(ch, "NEWS"))
 			// 	my_mlx_pixel_put(img, y, x, 0x0F009F00);
 			else if (char_in_str(ch, "2"))
-				my_mlx_pixel_put(img, y, x, 0x0F800000);
+				my_mlx_pixel_put(img, y, x, 0x00008000);
 			y++;
 		}
 		x++;
 	}
-	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
+	
 }
 
 void	draw_player(t_params *p, t_data *img)
 {
-	int	x = img->x * p->res_y / p->h_map * 3;
-	int	y = img->y * p->res_x / p->w_map * 2;
-	my_mlx_pixel_put(img, y, x, 0x007070FF);
-	x = img->x * p->res_y / p->h_map * 3 + 1;
-	y = img->y * p->res_x / p->w_map * 2 + 1;
-	my_mlx_pixel_put(img, y, x, 0x007070FF);
-	x = img->x * p->res_y / p->h_map * 3 + 1;
-	y = img->y * p->res_x / p->w_map * 2;
-	my_mlx_pixel_put(img, y, x, 0x007070FF);
-	x = img->x * p->res_y / p->h_map * 3;
-	y = img->y * p->res_x / p->w_map * 2 + 1;
-	my_mlx_pixel_put(img, y, x, 0x007070FF);
-	x = img->x * p->res_y / p->h_map * 3 + 1;
-	y = img->y * p->res_x / p->w_map * 2 + 2;
-	my_mlx_pixel_put(img, y, x, 0x007070FF);
+	int	row;
+	int	col;
+	int	i;
+	int j;
+	int delta;
+
+	delta = p->res_y / (p->h_map * 3 * 3);	
+	row = img->plr->y * p->res_y / (p->h_map * 3);
+	col = img->plr->x * p->res_x / (p->w_map * 2);
+	i = -delta;
+	while (++i < delta)
+	{
+		j = -delta;
+		while (++j < delta)
+			my_mlx_pixel_put(img, col + i, row + j, 0x00FF303F);
+	}
 }
+
+
 
 int	prepare_frame(t_data *img)
 {

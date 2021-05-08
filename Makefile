@@ -4,12 +4,13 @@ SRCS_FILES	= 	main.c \
 				parcer.c \
 				parcer_map.c \
 				parcer_lines.c \
-				parcer_helpers.c \
+				parcer_utils.c \
 				raise_error.c \
 				window.c \
 				hooks.c \
 				img_helpers.c \
-				active_buttons.c \
+				game.c \
+				player.c \
 				gnl/get_next_line.c \
 				gnl/get_next_line_utils.c \
 
@@ -35,14 +36,13 @@ LIB = ./src/libft/libft.a
 all:		$(NAME)
 
 %.o:		%.c
-			$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
-			# $(CC) $(INCLUDE) -c $< -o $@		
+			$(CC) $(CFLAGS) $(INCLUDE) -g -c $< -o $@	
 
 $(NAME):	$(OBJS) $(HEADER)
 			$(MAKE) -C $(dir $(MLX))
 			@cp $(MLX) $(notdir $(MLX))
 			$(MAKE) -C $(dir $(LIB))
-			$(CC) $(FRAMEWORK) $(INCLUDE) $(notdir $(MLX)) $(LIB)  -o $(NAME) $(OBJS)
+			$(CC) $(FRAMEWORK) $(INCLUDE) $(notdir $(MLX)) $(LIB) -o $(NAME) $(OBJS)
 
 bonus:		$(NAME)
 

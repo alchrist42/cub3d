@@ -26,15 +26,26 @@
 
 # define KEY_ESC 53
 
-typedef struct	s_krd
+typedef struct	s_player
 {
-	int	x;
-	int	y;
-	int	z;
-	int x1;
-	int y1;
-	int	z1;
-}	t_krd;
+	float	x;
+	float	y;
+	float	z;
+	float	vx;
+	float	vy;
+	float	vz;
+	float	speed;
+	float	angle;
+}	t_player;
+
+typedef struct s_buttons
+{
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+}	t_buttons;
+
 
 typedef struct s_params
 {
@@ -58,50 +69,54 @@ typedef struct s_params
 	t_list	*lst_map;
 	char	**map;
 
-	t_krd	*plr;
+	int		plr_x;
+	int		plr_y;
 	bool	save;
 }	t_params;
 
 typedef struct	s_data {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		llen;
-	int		end;
-	t_params *params;
-	float	x;
-	float	y;
-	bool	btn_w;
-	bool	btn_s;
+	void		*mlx;
+	void		*win;
+	void		*img;
+	char		*addr;
+	int			bpp;
+	int			llen;
+	int			end;
+	t_params 	*params;
+	t_player	*plr;
+	t_buttons	*btn;
 }				t_data;
 
+// raise_error.c
 void	ft_raise_error(char *s);
 
+// parcer_utils.c
 int		ft_arrlen(char **arr);
 int		ft_min(int a, int b);
 int		only_digits(char *s);
 void	ft_free_split(char **arr);
 int		char_in_str(char ch, char *charset);
 
-void	inicialise_params(t_params *p);
+// parser.c
 int		parcer(int argc, char **argv, t_params *p);
 int		parsing_args(int argc, char **argv, t_params *p);
+void	inicialise_params(t_params *p);
 void	parsing_params(int fd, t_params *p);
 void	parsing_line(char *s, t_params *p);
 
+// parser_lines.c
 void	get_resolution(char *s, t_params *p);
 void	get_colors(char *s, bool is_floor, t_params *p);
 void	get_texture(char *s, t_params *p);
 
+// parcer_map.c
 void	check_line_map(char *s, t_params *p);
 void	create_map(t_params *p);
 void	check_field(t_params *p);
 
 // window.c
-void	create_window(t_data *img, t_params *p);
-void	close_win(t_data *img);
+void	create_window(t_data *img, t_params *p, t_buttons *btn);
+int		close_win(t_data *img);
 
 // img_helpers.c
 void	draw_mmap(t_params *p, t_data	*img);
@@ -110,13 +125,16 @@ void	correct_resolution(t_data *img, t_params *p);
 int 	prepare_frame(t_data *img);
 void	draw_player(t_params *p, t_data *img);
 
-// active_buttons.c
+// hooks.c
 int		press_button(int keycode, t_data *img);
 int		release_button(int keycode, t_data *img);
 
-// hooks.c
-void	run_loop_game(t_data *img);
+// game.c
+void	run_game(t_data *img);
 int		main_game(t_data *img);
-void	change_position(t_data *img, t_params *p);
+
+// player.c
+void	initialise_player(t_data *img, t_params *p, t_player *plr);
+void	change_position(t_params *p, t_player *plr, t_buttons *btn);
 
 #endif

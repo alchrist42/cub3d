@@ -1,34 +1,32 @@
 #include "cub3d.h"
 
-
-void	run_loop_game(t_data *img)
+int	press_button(int keycode, t_data *img)
 {
-	mlx_hook(img->win, 2, 1L<<0, press_button, img);
-	mlx_hook(img->win, 3, 1L<<1, release_button, img);
-	mlx_loop_hook(img->mlx, main_game, img);
-	
-	mlx_loop(img->mlx);
-
-
-}
-
-int	main_game(t_data *img)
-{
-	t_params	*p;
-
-	p = img->params;
-	
-	change_position(img, p);
-	draw_mmap(p, img);
-	draw_player(p, img);
+	if (keycode == KEY_ESC)
+		close_win(img);
+	else if (keycode == KEY_W)
+		img->btn->w = true;
+	else if (keycode == KEY_S)
+		img->btn->s = true;
+	else if (keycode == KEY_A)
+		img->btn->a = true;
+	else if (keycode == KEY_D)
+		img->btn->d = true;
 	return (0);
 }
 
-void	change_position(t_data *img, t_params *p)
+int	release_button(int keycode, t_data *img)
 {
-	if (img->btn_w)
-	{
-		p->plr->x = 5;
-		printf("player top top to up =)\n");
-	}
+	if (keycode == KEY_ESC)
+		close_win(img);
+	else if (keycode == KEY_W)
+		img->btn->w = false;
+	else if (keycode == KEY_S)
+		img->btn->s = false;
+	else if (keycode == KEY_A)
+		img->btn->a = false;
+	else if (keycode == KEY_D)
+		img->btn->d = false;
+	
+	return (0);
 }

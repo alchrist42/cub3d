@@ -73,12 +73,8 @@ void	inicialise_params(t_params *p)
 	p->got_params = false;
 	p->end_map = 0;
 	p->lst_map = NULL;
-	p->plr = malloc(sizeof(*p->plr));
-	if (!p->plr)
-		ft_raise_error("Not allocate\n");
-	p->plr->x = -1;
-	p->plr->y = -1;
-	p->plr->z = 0;
+	p->plr_x = 0;
+	p->plr_y = 0;
 }
 
 /*

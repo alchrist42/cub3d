@@ -1,18 +1,17 @@
 #include "cub3d.h"
 
-void	create_window(t_data *img, t_params *p)
+void	create_window(t_data *img, t_params *p, t_buttons *btn)
 {
+
+	
 	img->mlx = mlx_init();
 	correct_resolution(img, p);
 	img->win = mlx_new_window(img->mlx, p->res_x, p->res_y, "Cub3D");
 	img->img = mlx_new_image(img->mlx, p->res_x, p->res_y);
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->llen, &img->end);
-	printf("Bpp = %i, llen = %i, endian = %i\n", img->bpp, img->llen, img->end);
-	
-	// inicialize other params?
 	img->params = p;
-	img->x = p->plr->x + 0.5;
-	img->y = p->plr->y + 0.5;
+	img->btn = btn;
+
 	// draw_mmap(p, img);
 }
 
@@ -22,10 +21,11 @@ void	create_window(t_data *img, t_params *p)
 **	
 **	@param	img		the mlx instance
 */
-void	close_win(t_data *img)
+int	close_win(t_data *img)
 {
+	if (img->win)
 		mlx_destroy_window(img->mlx, img->win);
-		exit (0);
+	exit (0);
 }
 
 
