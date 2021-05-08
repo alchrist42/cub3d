@@ -117,13 +117,15 @@ void	check_field(t_params *p);
 // window.c
 void	create_window(t_data *img, t_params *p, t_buttons *btn);
 int		close_win(t_data *img);
+void	correct_resolution(t_data *img, t_params *p);
 
 // img_helpers.c
 void	draw_mmap(t_params *p, t_data	*img);
 int		create_trgb(int t, int r, int g, int b);
-void	correct_resolution(t_data *img, t_params *p);
+
 int 	prepare_frame(t_data *img);
 void	draw_player(t_params *p, t_data *img);
+void	draw_ray_of_sight(t_params *p, t_data *img);
 
 // hooks.c
 int		press_button(int keycode, t_data *img);

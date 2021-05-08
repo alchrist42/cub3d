@@ -13,8 +13,10 @@ int	main_game(t_data *img)
 {
 
 	change_position(img->params, img->plr, img->btn);
-	draw_player(img->params, img);
 	draw_mmap(img->params, img);
+	draw_player(img->params, img);
+	draw_ray_of_sight(img->params,  img);
+	
 	
 	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
 	return (0);
