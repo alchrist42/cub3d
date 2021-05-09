@@ -1,11 +1,11 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <stdbool.h>
 # include <math.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <string.h>
-# include <stdbool.h>
 # include <unistd.h>
 # include <sys/errno.h>
 
@@ -21,9 +21,10 @@
 # define KEY_D 2
 # define KEY_UP 126
 # define KEY_DW 125
-# define KEY_L 123
-# define KEY_R 124
-
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_Q 12
+# define KEY_E 14
 # define KEY_ESC 53
 
 typedef struct	s_player
@@ -31,11 +32,10 @@ typedef struct	s_player
 	float	x;
 	float	y;
 	float	z;
-	float	vx;
-	float	vy;
-	float	vz;
+	double	vx;
+	double	vy;
+	double	vz;
 	float	speed;
-	float	angle;
 }	t_player;
 
 typedef struct s_buttons
@@ -44,6 +44,8 @@ typedef struct s_buttons
 	bool	a;
 	bool	s;
 	bool	d;
+	bool	q;
+	bool	e;
 }	t_buttons;
 
 
@@ -72,6 +74,9 @@ typedef struct s_params
 	int		plr_x;
 	int		plr_y;
 	bool	save;
+
+	double	sin_a;
+	double	cos_a;
 }	t_params;
 
 typedef struct	s_data {
@@ -136,7 +141,11 @@ void	run_game(t_data *img);
 int		main_game(t_data *img);
 
 // player.c
+void	inicialise_buttons(t_buttons *btn);
 void	initialise_player(t_data *img, t_params *p, t_player *plr);
+
+// mooving.c
 void	change_position(t_params *p, t_player *plr, t_buttons *btn);
+void	rotate_view(t_params *p, t_player *plr, t_buttons *btn);
 
 #endif

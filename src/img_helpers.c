@@ -76,7 +76,7 @@ void	draw_ray_of_sight(t_params *p, t_data *img)
 
 	row = img->plr->y * p->res_y / (p->h_map * 3);
 	col = img->plr->x * p->res_x / (p->w_map * 2);
-	printf("row=%f, col=%f\n", row, col);
+	// printf("row=%f, col=%f\n", row, col);
 	while (i < 100 && col > 1 && col < p->res_x && row > 1 && row < p->res_y)
 	{
 		my_mlx_pixel_put(img, col, row, 0x00BB305F);

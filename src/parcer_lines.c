@@ -100,15 +100,15 @@ void	get_texture(char *s, t_params *p)
 	// if (fd < 0)
 	// 	ft_raise_error("Missing texture file\n");
 	if (!ft_strncmp(s, "NO ", 3))
-		p->t_no = (s + 3);
+		p->t_no = ft_strdup(s + 3); //todo del strdup
 	else if (!ft_strncmp(s, "SO ", 3))
-		p->t_so = (s + 3);
+		p->t_so = ft_strdup(s + 3);
 	else if (!ft_strncmp(s, "WE ", 3))
-		p->t_we = (s + 3);
+		p->t_we = ft_strdup(s + 3);
 	else if (!ft_strncmp(s, "EA ", 3))
-		p->t_ea = (s + 3);
+		p->t_ea = ft_strdup(s + 3);
 	else if (!ft_strncmp(s, "S ", 2))
-		p->t_sp = (s + 2);
+		p->t_sp = ft_strdup(s + 2);
 	else
 		ft_raise_error("Impossible error!\n");
 	s[2] = 0;

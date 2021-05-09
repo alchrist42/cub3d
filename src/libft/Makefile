@@ -29,7 +29,7 @@ LIBC		=	ar rcs
 all:		$(NAME) 
 
 %.o:		%.c
-			$(CC) $(CFLAGS) -c $< -o $@
+			$(CC) $(CFLAGS) -c -O3 $< -o $@
 
 $(NAME):	$(OBJS) $(HEADER)
 			$(LIBC) $(NAME) $?

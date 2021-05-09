@@ -71,8 +71,11 @@ void	inicialise_params(t_params *p)
 	p->got_floor = false;
 	p->got_res = false;
 	p->got_params = false;
+	p->save = false;
 	p->end_map = 0;
 	p->lst_map = NULL;
+	p->h_map = 0;
+	p->w_map = 0;
 	p->plr_x = 0;
 	p->plr_y = 0;
 }

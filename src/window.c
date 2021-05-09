@@ -11,8 +11,6 @@ void	create_window(t_data *img, t_params *p, t_buttons *btn)
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->llen, &img->end);
 	img->params = p;
 	img->btn = btn;
-
-	// draw_mmap(p, img);
 }
 
 
@@ -44,4 +42,6 @@ void	correct_resolution(t_data *img, t_params *p)
 	mlx_get_screen_size(img->mlx, &x, &y);
 	p->res_x = ft_min(x, p->res_x);
 	p->res_y = ft_min(y, p->res_y);
+	p->sin_a = sin(M_PI / 60);
+	p->cos_a = cos(M_PI / 60);
 }

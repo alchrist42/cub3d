@@ -11,6 +11,7 @@ SRCS_FILES	= 	main.c \
 				img_helpers.c \
 				game.c \
 				player.c \
+				mooving.c \
 				gnl/get_next_line.c \
 				gnl/get_next_line_utils.c \
 
@@ -37,12 +38,13 @@ all:		$(NAME)
 
 %.o:		%.c
 			$(CC) $(CFLAGS) $(INCLUDE) -g -c $< -o $@	
+			#todo del -g
 
 $(NAME):	$(OBJS) $(HEADER)
 			$(MAKE) -C $(dir $(MLX))
-			@cp $(MLX) $(notdir $(MLX))
+			@mv $(MLX) $(notdir $(MLX))
 			$(MAKE) -C $(dir $(LIB))
-			$(CC) $(FRAMEWORK) $(INCLUDE) $(notdir $(MLX)) $(LIB) -o $(NAME) $(OBJS)
+			$(CC) $(FRAMEWORK) $(INCLUDE) $(notdir $(MLX)) $(LIB) -O3 -o $(NAME) $(OBJS)
 
 bonus:		$(NAME)
 
@@ -56,6 +58,7 @@ clean:
 fclean:		clean
 			@make -C $(dir $(LIB)) fclean
 			$(RM) $(MLX)
+			$(RM) $(notdir $(MLX))
 			$(RM) $(NAME)
 
 re:			fclean all
