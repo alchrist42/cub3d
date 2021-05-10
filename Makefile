@@ -7,13 +7,14 @@ SRCS_FILES	= 	main.c \
 				parcer_utils.c \
 				raise_error.c \
 				window.c \
-				hooks.c \
-				img_helpers.c \
 				game.c \
+				hooks.c \
+				get_img.c \
+				get_img_helpers.c \
 				player.c \
 				mooving.c \
 				gnl/get_next_line.c \
-				gnl/get_next_line_utils.c \
+				# gnl/get_next_line_utils.c \
 
 SRCS_FOLDER	=	src/
 HEADER		=	include/cub3d.h

@@ -14,11 +14,11 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_data *data, int row, int col, int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->llen + x * (data->bpp / 8));
+	dst = data->addr + (row * data->llen + col * (data->bpp / 8));
 	*(unsigned int*)dst = color;
 }
 
@@ -36,11 +36,13 @@ void	draw_mmap(t_params *p, t_data	*img)
 		{
 			ch = p->map[x*3 * p->h_map / p->res_y][y * 2 * p->w_map / p->res_x];
 			if (ch == '1')
-				my_mlx_pixel_put(img, y, x, 0x00AF80FF);
+				my_mlx_pixel_put(img, x, y, 0x004F204F);
 			// else if (char_in_str(ch, "NEWS"))
 			// 	my_mlx_pixel_put(img, y, x, 0x0F009F00);
 			else if (char_in_str(ch, "2"))
-				my_mlx_pixel_put(img, y, x, 0x00008000);
+				my_mlx_pixel_put(img, x, y, 0x00008000);
+			else
+				my_mlx_pixel_put(img, x, y, 0x00000000);
 			y++;
 		}
 		x++;
@@ -64,7 +66,7 @@ void	draw_player(t_params *p, t_data *img)
 	{
 		j = -delta;
 		while (++j < delta)
-			my_mlx_pixel_put(img, col + i, row + j, 0x00FF303F);
+			my_mlx_pixel_put(img, row + j, col + i, 0x00FF303F);
 	}
 }
 
@@ -79,7 +81,7 @@ void	draw_ray_of_sight(t_params *p, t_data *img)
 	// printf("row=%f, col=%f\n", row, col);
 	while (i < 100 && col > 1 && col < p->res_x && row > 1 && row < p->res_y)
 	{
-		my_mlx_pixel_put(img, col, row, 0x00BB305F);
+		my_mlx_pixel_put(img, row, col, 0x00BB305F);
 		col += img->plr->vx;
 		row += img->plr->vy;
 		
@@ -91,4 +93,9 @@ int	prepare_frame(t_data *img)
 {
 	(void)img;
 	return (0);
+}
+
+int	both_equal_sign(float x, float y)
+{
+	return ((x > 0 && y > 0) || (x < 0 && y < 0));
 }

@@ -29,6 +29,7 @@ void	check_line_map(char *s, t_params *p)
 	}
 	p->h_map++;
 	ft_lstadd_back(&p->lst_map, ft_lstnew(ft_strdup(s)));
+	printf("lst |%s\n", ft_lstlast(p->lst_map)->content);
 }
 
 /*
@@ -44,6 +45,7 @@ void	create_map(t_params *p)
 	p->w_map += 2;
 	p->h_map += 2;
 	p->map = malloc(sizeof(*p->map) * p->h_map);
+	// printf("allocate. w:%i, h:%i, mem( %zu ** )\n", p->w_map, p->h_map, sizeof(*p->map));
 	if (!p->map)
 		ft_raise_error("Cannot allocate\n");
 	i = 0;
@@ -85,6 +87,27 @@ void	check_field(t_params *p)
 					|| !p->map[i][j + 1] || p->map[i][j + 1] == ' '
 					|| !p->map[i][j - 1] || p->map[i][j - 1] == ' '))
 			{
+				// for (int z = 0; z < p->w_map; z++)
+				// {
+				// 	printf("|%i|", z % 10);
+				// }
+				// printf("\n");
+				// for (int z = 0; z < p->w_map; z++)
+				// {
+				// 	printf("|%c|", p->map[i - 1][z]);
+				// }
+				// printf("\n");
+				// for (int z = 0; z < p->w_map; z++)
+				// {
+				// 	printf("|%c|", p->map[i][z]);
+				// }
+				// printf("\n");
+				// for (int z = 0; z < p->w_map; z++)
+				// {
+				// 	printf("|%c|", p->map[i + 1][z]);
+				// }
+				// printf("\n");
+				// printf("4 cells: |%c,%c,%c,%c|\n", p->map[i + 1][j], p->map[i - 1][j], p->map[i][j + 1], p->map[i][j - 1]);
 				printf("[%d,%d] %s \n", i, j, p->map[i] + 2);	
 				ft_raise_error("Hole in the field\n");
 			}

@@ -124,9 +124,17 @@ void	create_window(t_data *img, t_params *p, t_buttons *btn);
 int		close_win(t_data *img);
 void	correct_resolution(t_data *img, t_params *p);
 
-// img_helpers.c
+// get_img.c
+void	get_img(t_params *p, t_data *img);
+double	get_dist_to_wall(t_params *p, t_data *img);
+
+
+// get_img_helpers.c
+void	my_mlx_pixel_put(t_data *data, int row, int col, int color);
 void	draw_mmap(t_params *p, t_data	*img);
 int		create_trgb(int t, int r, int g, int b);
+int		both_equal_sign(float x, float y);
+
 
 int 	prepare_frame(t_data *img);
 void	draw_player(t_params *p, t_data *img);
@@ -147,5 +155,6 @@ void	initialise_player(t_data *img, t_params *p, t_player *plr);
 // mooving.c
 void	change_position(t_params *p, t_player *plr, t_buttons *btn);
 void	rotate_view(t_params *p, t_player *plr, t_buttons *btn);
+void	rotate_by_ange(double *x, double *y, double sin_a, double cos_a);
 
 #endif

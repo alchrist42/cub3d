@@ -92,6 +92,7 @@ void	parsing_params(int fd, t_params *p)
 	int		res;
 
 	res = 1;
+	line = NULL;
 	while (res)
 	{
 		res = get_next_line(fd, &line);

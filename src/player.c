@@ -17,7 +17,7 @@ void	initialise_player(t_data *img, t_params *p, t_player *plr)
 	plr->x = p->plr_x + 0.5;
 	plr->y = p->plr_y + 0.5;
 	plr->z = 1;
-	plr->speed = 0.1;
+	plr->speed = 0.05;
 	plr->vx = 0;
 	plr->vy = 0;
 	plr->vz = 0;
@@ -29,6 +29,7 @@ void	initialise_player(t_data *img, t_params *p, t_player *plr)
 		plr->vy = 1;
 	else
 		plr->vy = -1;
+	rotate_by_ange(&plr->vx, &plr->vy, sin(M_PI / 180), cos(M_PI / 180));
 }
 
 
