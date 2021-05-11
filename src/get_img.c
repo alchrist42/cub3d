@@ -3,24 +3,35 @@
 void	get_img(t_params *p, t_data *img) 
 {
 	int	i;
+	int j;
 	double	vx = img->plr->vx;
 	double	vy = img->plr->vy;
+	double	atng;
+	// int w;
+	int up_board;
+	int down_board;
 
-	rotate_by_ange(&vx, &vy, -sin(M_PI / 6), cos(M_PI / 6));
-	i = 0;
-	while(i < p->res_x)
+	rotate_by_ange(&vx, &vy, -p->start_sin, p->start_cos);
+	i =  -1;
+	while(++i < p->res_x)
 	{
-		rotate_by_ange(&vx, &vy, p->sin_x, p->cos_x);
-		get_dist_to_wall(p, img, vx, vy);
-		i++;
+		// if (i % 2)
+			rotate_by_ange(&vx, &vy, p->sin_step, p->cos_step);
+		// atng = atan(1 / get_dist_to_wall(p, img, vx, vy));
+		atng = 0.6 / get_dist_to_wall(p, img, vx, vy) / cos(fabs(p->angle_x / 2 - i * p->angle_step));
+		j = -1;
+		up_board = (p->angle_y / 2 - atng) / p->angle_step;
+		down_board = (p->angle_y / 2 + atng) / p->angle_step;
+		while (++j < p->res_y)
+		{
+			if ( j > up_board && j < down_board )
+				my_mlx_pixel_put(img, j, i, 0x00225522);
+			else
+				my_mlx_pixel_put(img, j, i, 0x00111111);
+		}
+
 	}
-	// i = p->res_x / 2;
-	// while(i)
-	// {
-	// 	rotate_by_ange(&vx, &vy, p->sin_x, p->cos_x);
-	// 	get_dist_to_wall(p, img, vx, vy);
-	// 	i++;
-	// }
+
 
 	
 }
@@ -76,7 +87,7 @@ double	get_dist_to_wall(t_params *p, t_data *img, double vx, double vy)
 	}
 	// founded first point!
 	// printf("-----------\nplayer (%f %f)\npoint(%i): %f %f \n", img->plr->y, img->plr->x, i, row, col);
-	my_mlx_pixel_put(img, row * p->res_y / (p->h_map * 3), col * p->res_x / (p->w_map * 2), 0x00BFF0FF);
+	// my_mlx_pixel_put(img, row * p->res_y / (p->h_map * 3), col * p->res_x / (p->w_map * 2), 0x00BFF0FF);
 	
 	// return (sqrt((row - img->plr->y) * (row - img->plr->y) + (col - img->plr->x) * (col - img->plr->x)));
 
@@ -84,7 +95,7 @@ double	get_dist_to_wall(t_params *p, t_data *img, double vx, double vy)
 	// int srow = row;
 	// int	scol = col;
 
-	while (++i < 40)
+	while (++i < 200)
 	{
 		
 		if (p->map[(int)(row + 0.000001 * row_y)][(int)(col + 0.000001 * col_x )] == '1')
@@ -104,7 +115,7 @@ double	get_dist_to_wall(t_params *p, t_data *img, double vx, double vy)
 			col2 = col + (row2 - row) * row_x * row_y;
 		}
 		// printf("-----------\nplayer (%f %f)\npoint(%i): %f %f \n", img->plr->y, img->plr->x, i, row, col);
-		my_mlx_pixel_put(img, row * p->res_y / (p->h_map * 3), col * p->res_x / (p->w_map * 2), 0x00BFB0FF);
+		// my_mlx_pixel_put(img, row * p->res_y / (p->h_map * 3), col * p->res_x / (p->w_map * 2), 0x00BFB0FF);
 	}
 	return (0);
 	

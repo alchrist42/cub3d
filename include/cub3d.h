@@ -77,8 +77,14 @@ typedef struct s_params
 
 	double	sin_a;
 	double	cos_a;
-	double	sin_x;
-	double	cos_x;
+
+	double	angle_x;
+	double	angle_y;
+	double	start_cos;
+	double	start_sin;
+	double	angle_step;
+	double	sin_step;
+	double	cos_step;
 }	t_params;
 
 typedef struct	s_data {

@@ -16,8 +16,8 @@ int	main_game(t_data *img)
 
 	rotate_view(img->params, img->plr, img->btn);
 	change_position(img->params, img->plr, img->btn);
-	draw_mmap(img->params, img);
-	draw_player(img->params, img);
+	// draw_mmap(img->params, img);
+	// draw_player(img->params, img);
 	// draw_ray_of_sight(img->params,  img);
 	get_img(img->params, img);
 	
