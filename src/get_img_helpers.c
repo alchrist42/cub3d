@@ -95,7 +95,3 @@ int	prepare_frame(t_data *img)
 	return (0);
 }
 
-int	both_equal_sign(float x, float y)
-{
-	return ((x > 0 && y > 0) || (x < 0 && y < 0));
-}

@@ -35,6 +35,10 @@ void	change_position(t_params *p, t_player *plr, t_buttons *btn)
 		plr->y = row;
 		plr->x = col;
 	}
+	else if (p->map[(int)row][(int)plr->x] != '1')
+		plr->y = row;
+	else if (p->map[(int)plr->y][(int)col] != '1')
+		plr->x = col;
 }
 
 void	rotate_view(t_params *p, t_player *plr, t_buttons *btn)

@@ -44,4 +44,6 @@ void	correct_resolution(t_data *img, t_params *p)
 	p->res_y = ft_min(y, p->res_y);
 	p->sin_a = sin(M_PI / 60);
 	p->cos_a = cos(M_PI / 60);
+	p->sin_x = sin(M_PI / (3 * p->res_x));
+	p->cos_x = cos(M_PI / (3 * p->res_x));
 }

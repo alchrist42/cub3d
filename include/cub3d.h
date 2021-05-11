@@ -77,6 +77,8 @@ typedef struct s_params
 
 	double	sin_a;
 	double	cos_a;
+	double	sin_x;
+	double	cos_x;
 }	t_params;
 
 typedef struct	s_data {
@@ -126,7 +128,7 @@ void	correct_resolution(t_data *img, t_params *p);
 
 // get_img.c
 void	get_img(t_params *p, t_data *img);
-double	get_dist_to_wall(t_params *p, t_data *img);
+double	get_dist_to_wall(t_params *p, t_data *img, double vx, double vy);
 
 
 // get_img_helpers.c
