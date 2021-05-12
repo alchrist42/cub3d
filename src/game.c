@@ -16,10 +16,10 @@ int	main_game(t_data *img)
 
 	rotate_view(img->param, img->plr, img->btn, img);
 	change_pos(img->param, img->plr, img->btn, img->v);
-	draw_mmap(img->param, img);
-	draw_player(img->param, img);
-	draw_ray_of_sight(img->param,  img);
-	// get_img(img->param, img);
+	// draw_mmap(img->param, img);
+	// draw_player(img->param, img);
+	// draw_ray_of_sight(img->param,  img);
+	get_img(img->param, img);
 	
 	
 	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);

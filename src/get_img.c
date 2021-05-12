@@ -2,32 +2,38 @@
 
 void	get_img(t_param *p, t_data *img) 
 {
-	int	i;
-	int j;
+	int	col;
+	int	start_ind;
 	double	vx = img->plr->vx;
 	double	vy = img->plr->vy;
-	double	atng;
-	int up_board;
-	int down_board;
+	double	wall_h;
+	// int up_board;
+	// int down_board;
 
-	rotate_by_ange(&vx, &vy, -p->start_sin, p->start_cos);
-	i =  -1;
-	while(++i < p->res_x)
+	col = -1;
+	start_ind = img->plr->ind_v - p->res_x / 2;
+	if (start_ind < 0)
+		start_ind += p->cnt_v;
+	while(++col < p->res_x)
 	{
-		rotate_by_ange(&vx, &vy, p->sin_step, p->cos_step);
-		atng = 0.7 / get_dist_to_wall(p, img, vx, vy) / cos(fabs(p->angle_x / 2 - i * p->angle_step));
-		j = -1;
-		up_board = (p->angle_y / 2 - atng) / p->angle_step;
-		down_board = (p->angle_y / 2 + atng) / p->angle_step;
-		// while (++j < p->res_y)
-		// {
-		// 	if ( j > up_board && j < down_board )
-		// 		my_mlx_pixel_put(img, j, i, 0x00225522);
-		// 	else
-		// 		my_mlx_pixel_put(img, j, i, 0x00111111);
-		// }
-
+		vx = img->v[start_ind + col].x;
+		vy = img->v[start_ind + col].y;
+		wall_h = p->res_y / get_dist_to_wall(p, img, vx, vy) / img->v[ft_abs(p->res_x / 2 - col)].x;
+		put_column(p, img, col, p->res_y / 2 - wall_h, p->res_y / 2 + wall_h);
 	}
+}
+
+void	put_column(t_param *p, t_data *img, int col, int up, int down)
+{
+	int	row;
+
+	row = 0;
+	while (row <= up && row < p->res_y)
+		my_mlx_pixel_put(img, row++, col, 0x00111111);
+	while (row < down && row < p->res_y)
+		my_mlx_pixel_put(img, row++, col, 0x00225522);
+	while (row < p->res_y)
+		my_mlx_pixel_put(img, row++, col, 0x00111111);
 }
 
 double	get_dist_to_wall(t_param *p, t_data *img, double vx, double vy)

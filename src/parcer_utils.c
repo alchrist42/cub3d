@@ -16,19 +16,6 @@ int		ft_arrlen(char **arr)
 	return (i);
 }
 
-/*
-**	@brief	just return minimal from two elements
-**	
-**	@param	a		DOC
-**	@param	b		DOC
-**	@return	int	first or second element
-*/
-int		ft_min(int a, int b)
-{
-	if (a > b)
-		return (b);
-	return (a);
-}
 
 /*
 **	@brief	tests strings consist only digits

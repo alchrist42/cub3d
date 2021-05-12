@@ -119,9 +119,12 @@ typedef struct	s_data {
 // raise_error.c
 void	ft_raise_error(char *s);
 
+//utils.c
+int		ft_abs(int a);
+int		ft_min(int a, int b);
+
 // parcer_utils.c
 int		ft_arrlen(char **arr);
-int		ft_min(int a, int b);
 int		only_digits(char *s);
 void	ft_free_split(char **arr);
 int		char_in_str(char ch, char *charset);
@@ -150,6 +153,7 @@ void	correct_resolution(t_data *img, t_param *p);
 
 // get_img.c
 void	get_img(t_param *p, t_data *img);
+void	put_column(t_param *p, t_data *img, int col, int up, int down);
 double	get_dist_to_wall(t_param *p, t_data *img, double vx, double vy);
 
 

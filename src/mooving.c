@@ -52,13 +52,13 @@ void	rotate_view(t_param *p, t_player *plr, t_button *btn, t_data *img) //del im
 	if (btn->e && !btn->q)
 		plr->ind_v += plr->rotate_speed;
 		// rotate_by_ange(&plr->vx, &plr->vy, p->sin_a, p->cos_a);
-		// (void)img;
+		(void)img;
 	if (plr->ind_v >= p->cnt_v)
 		plr->ind_v -= p->cnt_v;
 	else if (plr->ind_v < 0)
 		plr->ind_v += p->cnt_v;
-	plr->vx = img->v[plr->ind_v].x;
-	plr->vy = img->v[plr->ind_v].y;
+	// plr->vx = img->v[plr->ind_v].x;
+	// plr->vy = img->v[plr->ind_v].y;
 }
 
 void	rotate_by_ange(double *x, double *y, double sin_a, double cos_a)

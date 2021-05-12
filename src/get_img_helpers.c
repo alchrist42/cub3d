@@ -109,11 +109,11 @@ void	pe4em_vectora(t_data *img, t_param *p)
 	sin_step = sin(M_PI * 2 / p->cnt_v);
 	cos_step = cos(M_PI * 2 / p->cnt_v);
 
-	img->v = malloc(sizeof(*img->v) * p->cnt_v);
+	img->v = malloc(sizeof(*img->v) * p->cnt_v * 1.21);
 	i = 0;
 	img->v[i].x = 1;
 	img->v[i].y = 0;
-	while (++i < p->cnt_v)
+	while (++i < p->cnt_v * 1.21)
 	{
 		img->v[i].x = img->v[i - 1].x;
 		img->v[i].y = img->v[i - 1].y;
@@ -125,9 +125,9 @@ void	pe4em_vectora(t_data *img, t_param *p)
 		img->v[i].ry = 1;
 		if (img->v[i].y < 0)
 			img->v[i].ry = -1;
-		img->v[i].rx = img->v[i].x / img->v[i].y * img->v[i].ry;		
+		img->v[i].rx = img->v[i].x / img->v[i].y * img->v[i].ry;
 	}
-	printf("zapekli vectorov: %d, first: %f %f\n", p->cnt_v, img->v[1].x, img->v[1].y);
+	printf("zapekli vectorov: %d, first: %f %f\n", i, img->v[1].x, img->v[1].y);
 	i--;
 	rotate_by_ange(&img->v[i].x, &img->v[i].y, sin_step, cos_step);
 	printf("zapekli vectorov: %d, last: %f %f\n", p->cnt_v, img->v[i].x, img->v[i].y);
