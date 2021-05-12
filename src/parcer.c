@@ -67,9 +67,9 @@ int		parsing_args(int argc, char **argv, t_param *p)
 */
 void	inicialise_params(t_param *p)
 {
-	p->got_cel = false;
-	p->got_floor = false;
-	p->got_res = false;
+	p->cel = -1;
+	p->floor = -1;
+	p->res_x = 0;
 	p->got_param = false;
 	p->save = false;
 	p->end_map = 0;
@@ -129,8 +129,8 @@ void	parsing_line(char *s, t_param *p)
 		get_texture(s, p);
 	else
 	{
-		printf("cel %d , floor %d, res %d , %s + %s + %s + %s + %s\n", p->got_cel, p->got_floor,p->got_res , p->t_so ,p->t_we ,p->t_no , p->t_ea , p->t_sp);
+		printf("cel %d , floor %d, res %d , %s + %s + %s + %s + %s\n", p->cel, p->floor, p->res_x , p->t_so ,p->t_we ,p->t_no , p->t_ea , p->t_sp);
 		ft_raise_error(ft_strjoin("Cannot parse string: ", s));
 	}
-	p->got_param = (p->got_cel && p->got_floor && p->got_res && p->t_so && p->t_we && p->t_no && p->t_ea && p->t_sp);
+	p->got_param = (p->cel >= 0 && p->floor >= 0 && p->res_x && p->t_so && p->t_we && p->t_no && p->t_ea && p->t_sp);
 }	

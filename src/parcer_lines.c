@@ -10,7 +10,7 @@ void	get_resolution(char *s, t_param *p)
 {
 	char **arr;
 
-	if (p->got_res)
+	if (p->res_x)
 		ft_raise_error("Dublicate resolution string\n");
 	arr = ft_split_set(s, ", ");
 	if (ft_arrlen(arr) != 2 || !only_digits(arr[0]) || !only_digits(arr[1]))
@@ -23,7 +23,6 @@ void	get_resolution(char *s, t_param *p)
 		ft_raise_error("Zero resolution in parametrs\n");
 	if (DEBUG)
 		printf("get R from %s.... got: x = %d, y = %d\n", s, p->res_x, p->res_y);
-	p->got_res = true;
 	ft_free_split(arr);
 }
 
@@ -36,24 +35,17 @@ void	get_resolution(char *s, t_param *p)
 */
 void	put_colors_to_params(int *color, bool is_floor, t_param *p)
 {
-	int	i;
-	
-	i = -1;
 	if (is_floor)
 	{
-		if (p->got_floor)
+		if (p->floor != -1)
 			ft_raise_error("Dublicate floor color string\n");
-		while (++i < 3)
-			p->floor[i] = color[i];
-		p->got_floor = true;
+		p->floor = create_trgb(0, color[0], color[1], color[2]);
 	}
 	else
 	{
-		if (p->got_cel)
+		if (p->cel != -1)
 			ft_raise_error("Dublicate celling color string\n");
-		while (++i < 3)
-			p->cel[i] = color[i];
-		p->got_cel = true;
+		p->cel = create_trgb(0, color[0], color[1], color[2]);
 	}
 }
 

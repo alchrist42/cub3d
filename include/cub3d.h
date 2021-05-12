@@ -70,11 +70,8 @@ typedef struct s_param
 	char	*t_we;
 	char	*t_ea;
 	char	*t_sp;
-	int		floor[3];
-	int		cel[3];
-	bool	got_res;
-	bool	got_floor;
-	bool	got_cel;
+	int		floor;
+	int		cel;
 	bool	got_param;
 
 	bool	end_map;
