@@ -116,6 +116,14 @@ typedef struct	s_data {
 	t_vector	*v;
 }				t_data;
 
+typedef struct s_dot
+{
+	float	x;
+	float	y;
+	float	z;
+}	t_dot;	
+
+
 // raise_error.c
 void	ft_raise_error(char *s);
 
@@ -154,7 +162,9 @@ void	correct_resolution(t_data *img, t_param *p);
 // get_img.c
 void	get_img(t_param *p, t_data *img);
 void	put_column(t_param *p, t_data *img, int col, int up, int down);
-double	get_dist_to_wall(t_param *p, t_data *img, double vx, double vy);
+void	get_first_cross(t_data *img, t_vector *vray, t_dot *dot, t_dot *d1, t_dot *d2);
+float	get_dist_to_wall(t_data *img, t_vector vray);
+
 
 
 // get_img_helpers.c

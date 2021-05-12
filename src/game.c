@@ -11,8 +11,8 @@ void	run_game(t_data *img)
 
 int	main_game(t_data *img)
 {
-	// img->img = mlx_new_image(img->mlx, img->param->res_x, img->param->res_y);
-	// img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->llen, &img->end);
+	img->img = mlx_new_image(img->mlx, img->param->res_x, img->param->res_y);
+	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->llen, &img->end);
 
 	rotate_view(img->param, img->plr, img->btn, img);
 	change_pos(img->param, img->plr, img->btn, img->v);
