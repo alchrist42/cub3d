@@ -21,7 +21,7 @@ void	my_mlx_pixel_put(t_data *data, int row, int col, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	draw_mmap(t_params *p, t_data	*img)
+void	draw_mmap(t_param *p, t_data	*img)
 {
 	int x;
 	int	y;
@@ -49,7 +49,7 @@ void	draw_mmap(t_params *p, t_data	*img)
 	
 }
 
-void	draw_player(t_params *p, t_data *img)
+void	draw_player(t_param *p, t_data *img)
 {
 	int	row;
 	int	col;
@@ -69,7 +69,7 @@ void	draw_player(t_params *p, t_data *img)
 	}
 }
 
-void	draw_ray_of_sight(t_params *p, t_data *img)
+void	draw_ray_of_sight(t_param *p, t_data *img)
 {
 	int i = 0;
 	float	row;
@@ -94,3 +94,43 @@ int	prepare_frame(t_data *img)
 	return (0);
 }
 
+void	pe4em_vectora(t_data *img, t_param *p)
+{
+
+
+	int i;
+	double	sin_step;
+	double	cos_step;
+
+	p->cnt_v = p->res_x * 5;
+	if (p->cnt_v < 360)
+		p->cnt_v = 360;
+	
+	sin_step = sin(M_PI * 2 / p->cnt_v);
+	cos_step = cos(M_PI * 2 / p->cnt_v);
+
+	img->v = malloc(sizeof(*img->v) * p->cnt_v);
+	i = 0;
+	img->v[i].x = 1;
+	img->v[i].y = 0;
+	while (++i < p->cnt_v)
+	{
+		img->v[i].x = img->v[i - 1].x;
+		img->v[i].y = img->v[i - 1].y;
+		rotate_by_ange(&img->v[i].x, &img->v[i].y, sin_step, cos_step);
+		img->v[i].cx = 1;
+		if (img->v[i].x < 0)
+			img->v[i].cx = -1;
+		img->v[i].cy = img->v[i].y / img->v[i].x * img->v[i].cx;
+		img->v[i].ry = 1;
+		if (img->v[i].y < 0)
+			img->v[i].ry = -1;
+		img->v[i].rx = img->v[i].x / img->v[i].y * img->v[i].ry;		
+	}
+	printf("zapekli vectorov: %d, first: %f %f\n", p->cnt_v, img->v[1].x, img->v[1].y);
+	i--;
+	rotate_by_ange(&img->v[i].x, &img->v[i].y, sin_step, cos_step);
+	printf("zapekli vectorov: %d, last: %f %f\n", p->cnt_v, img->v[i].x, img->v[i].y);
+
+
+}

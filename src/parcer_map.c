@@ -6,7 +6,7 @@
 **	@param	s		pointer to string
 **	@param	p		pointer to structure with parametrs
 */
-void	check_line_map(char *s, t_params *p)
+void	check_line_map(char *s, t_param *p)
 {
 	int	i;
 
@@ -37,7 +37,7 @@ void	check_line_map(char *s, t_params *p)
 **	
 **	@param	p		pointer to structure with parametrs
 */
-void	create_map(t_params *p)
+void	create_map(t_param *p)
 {
 	int	i;
 	t_list	*list_elem;
@@ -70,7 +70,7 @@ void	create_map(t_params *p)
 **	
 **	@param	p		pointer to structure with parametrs
 */
-void	check_field(t_params *p)
+void	check_field(t_param *p)
 {
 	int	i;
 	int	j;

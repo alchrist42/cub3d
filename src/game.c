@@ -11,15 +11,15 @@ void	run_game(t_data *img)
 
 int	main_game(t_data *img)
 {
-	// img->img = mlx_new_image(img->mlx, img->params->res_x, img->params->res_y);
+	// img->img = mlx_new_image(img->mlx, img->param->res_x, img->param->res_y);
 	// img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->llen, &img->end);
 
-	rotate_view(img->params, img->plr, img->btn);
-	change_position(img->params, img->plr, img->btn);
-	// draw_mmap(img->params, img);
-	// draw_player(img->params, img);
-	// draw_ray_of_sight(img->params,  img);
-	get_img(img->params, img);
+	rotate_view(img->param, img->plr, img->btn, img);
+	change_pos(img->param, img->plr, img->btn, img->v);
+	draw_mmap(img->param, img);
+	draw_player(img->param, img);
+	draw_ray_of_sight(img->param,  img);
+	// get_img(img->param, img);
 	
 	
 	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);

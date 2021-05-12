@@ -6,7 +6,7 @@
 **	@param	s		pointer to string
 **	@param	p		pointer to structure to save different parametrs
 */
-void	get_resolution(char *s, t_params *p)
+void	get_resolution(char *s, t_param *p)
 {
 	char **arr;
 
@@ -34,7 +34,7 @@ void	get_resolution(char *s, t_params *p)
 **	@param	is_floor	
 **	@param	p		pointer to structure to save different parametrs
 */
-void	put_colors_to_params(int *color, bool is_floor, t_params *p)
+void	put_colors_to_params(int *color, bool is_floor, t_param *p)
 {
 	int	i;
 	
@@ -64,7 +64,7 @@ void	put_colors_to_params(int *color, bool is_floor, t_params *p)
 **	@param	is_floor		DOC
 **	@param	p		pointer to structure to save different parametrs
 */
-void	get_colors(char *s, bool is_floor, t_params *p)
+void	get_colors(char *s, bool is_floor, t_param *p)
 {
 	char	**arr;
 	int		color[3];
@@ -92,7 +92,7 @@ void	get_colors(char *s, bool is_floor, t_params *p)
 **	@param	s		pointer to string
 **	@param	p		pointer to structure to save different parametrs
 */
-void	get_texture(char *s, t_params *p)
+void	get_texture(char *s, t_param *p)
 {
 	int	fd;
 

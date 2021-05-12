@@ -27,6 +27,16 @@
 # define KEY_E 14
 # define KEY_ESC 53
 
+typedef struct	s_vector
+{
+	double	x;
+	double	y;
+	double	rx;
+	double	ry;
+	double	cx;
+	double	cy;
+}	t_vector;
+
 typedef struct	s_player
 {
 	float	x;
@@ -35,10 +45,12 @@ typedef struct	s_player
 	double	vx;
 	double	vy;
 	double	vz;
+	int		ind_v;
+	int		rotate_speed;
 	float	speed;
 }	t_player;
 
-typedef struct s_buttons
+typedef struct s_button
 {
 	bool	w;
 	bool	a;
@@ -46,10 +58,10 @@ typedef struct s_buttons
 	bool	d;
 	bool	q;
 	bool	e;
-}	t_buttons;
+}	t_button;
 
 
-typedef struct s_params
+typedef struct s_param
 {
 	int		res_x;
 	int		res_y;
@@ -63,7 +75,7 @@ typedef struct s_params
 	bool	got_res;
 	bool	got_floor;
 	bool	got_cel;
-	bool	got_params;
+	bool	got_param;
 
 	bool	end_map;
 	int		h_map;
@@ -75,6 +87,8 @@ typedef struct s_params
 	int		plr_y;
 	bool	save;
 
+	int		cnt_v;
+	
 	double	sin_a;
 	double	cos_a;
 
@@ -85,7 +99,7 @@ typedef struct s_params
 	double	angle_step;
 	double	sin_step;
 	double	cos_step;
-}	t_params;
+}	t_param;
 
 typedef struct	s_data {
 	void		*mlx;
@@ -95,9 +109,11 @@ typedef struct	s_data {
 	int			bpp;
 	int			llen;
 	int			end;
-	t_params 	*params;
+	
+	t_param 	*param;
 	t_player	*plr;
-	t_buttons	*btn;
+	t_button	*btn;
+	t_vector	*v;
 }				t_data;
 
 // raise_error.c
@@ -111,42 +127,43 @@ void	ft_free_split(char **arr);
 int		char_in_str(char ch, char *charset);
 
 // parser.c
-int		parcer(int argc, char **argv, t_params *p);
-int		parsing_args(int argc, char **argv, t_params *p);
-void	inicialise_params(t_params *p);
-void	parsing_params(int fd, t_params *p);
-void	parsing_line(char *s, t_params *p);
+int		parcer(int argc, char **argv, t_param *p);
+int		parsing_args(int argc, char **argv, t_param *p);
+void	inicialise_params(t_param *p);
+void	parsing_params(int fd, t_param *p);
+void	parsing_line(char *s, t_param *p);
 
 // parser_lines.c
-void	get_resolution(char *s, t_params *p);
-void	get_colors(char *s, bool is_floor, t_params *p);
-void	get_texture(char *s, t_params *p);
+void	get_resolution(char *s, t_param *p);
+void	get_colors(char *s, bool is_floor, t_param *p);
+void	get_texture(char *s, t_param *p);
 
 // parcer_map.c
-void	check_line_map(char *s, t_params *p);
-void	create_map(t_params *p);
-void	check_field(t_params *p);
+void	check_line_map(char *s, t_param *p);
+void	create_map(t_param *p);
+void	check_field(t_param *p);
 
 // window.c
-void	create_window(t_data *img, t_params *p, t_buttons *btn);
+void	create_window(t_data *img, t_param *p, t_button *btn);
 int		close_win(t_data *img);
-void	correct_resolution(t_data *img, t_params *p);
+void	correct_resolution(t_data *img, t_param *p);
 
 // get_img.c
-void	get_img(t_params *p, t_data *img);
-double	get_dist_to_wall(t_params *p, t_data *img, double vx, double vy);
+void	get_img(t_param *p, t_data *img);
+double	get_dist_to_wall(t_param *p, t_data *img, double vx, double vy);
 
 
 // get_img_helpers.c
 void	my_mlx_pixel_put(t_data *data, int row, int col, int color);
-void	draw_mmap(t_params *p, t_data	*img);
+void	draw_mmap(t_param *p, t_data	*img);
 int		create_trgb(int t, int r, int g, int b);
 int		both_equal_sign(float x, float y);
+void	pe4em_vectora(t_data *img, t_param *p);
 
 
 int 	prepare_frame(t_data *img);
-void	draw_player(t_params *p, t_data *img);
-void	draw_ray_of_sight(t_params *p, t_data *img);
+void	draw_player(t_param *p, t_data *img);
+void	draw_ray_of_sight(t_param *p, t_data *img);
 
 // hooks.c
 int		press_button(int keycode, t_data *img);
@@ -157,12 +174,12 @@ void	run_game(t_data *img);
 int		main_game(t_data *img);
 
 // player.c
-void	inicialise_buttons(t_buttons *btn);
-void	initialise_player(t_data *img, t_params *p, t_player *plr);
+void	inicialise_buttons(t_button *btn);
+void	initialise_player(t_data *img, t_param *p, t_player *plr);
 
 // mooving.c
-void	change_position(t_params *p, t_player *plr, t_buttons *btn);
-void	rotate_view(t_params *p, t_player *plr, t_buttons *btn);
+void	change_pos(t_param *p, t_player *plr, t_button *btn, t_vector *vs);
+void	rotate_view(t_param *p, t_player *plr, t_button *btn, t_data *img);
 void	rotate_by_ange(double *x, double *y, double sin_a, double cos_a);
 
 #endif

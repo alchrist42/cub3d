@@ -9,14 +9,14 @@
 **	@param	p		pointer to structure to save different parametrs from file
 **	@return	int		always zero now
 */
-int		parcer(int argc, char **argv, t_params *p)
+int		parcer(int argc, char **argv, t_param *p)
 {
 	int	fd;
 	
 	fd = parsing_args(argc, argv, p);
 	inicialise_params(p);
 	parsing_params(fd ,p);
-	if (!p->got_params || !p->h_map)
+	if (!p->got_param || !p->h_map)
 		ft_raise_error("Missing params or map");
 	printf("GOOD PARSING\n");
 	create_map(p);
@@ -35,7 +35,7 @@ int		parcer(int argc, char **argv, t_params *p)
 **	@param	p			pointer to structure to save different parametrs
 **	@return	int			file desciptor
 */
-int		parsing_args(int argc, char **argv, t_params *p)
+int		parsing_args(int argc, char **argv, t_param *p)
 {
 	int	fd;
 	int	len_fname;
@@ -65,12 +65,12 @@ int		parsing_args(int argc, char **argv, t_params *p)
 **	
 **	@param	p	pointer to structure to save different parametrs from file
 */
-void	inicialise_params(t_params *p)
+void	inicialise_params(t_param *p)
 {
 	p->got_cel = false;
 	p->got_floor = false;
 	p->got_res = false;
-	p->got_params = false;
+	p->got_param = false;
 	p->save = false;
 	p->end_map = 0;
 	p->lst_map = NULL;
@@ -86,7 +86,7 @@ void	inicialise_params(t_params *p)
 **	@param	fd		file descriptor
 **	@param	p		pointer to structure to save different parametrs
 */
-void	parsing_params(int fd, t_params *p)
+void	parsing_params(int fd, t_param *p)
 {
 	char	*line;
 	int		res;
@@ -104,7 +104,7 @@ void	parsing_params(int fd, t_params *p)
 		{
 			if (p->end_map)
 				ft_raise_error("Empty line in map structure\n");
-			if (p->got_params)
+			if (p->got_param)
 				check_line_map(line, p);
 			else
 				parsing_line(line, p);
@@ -119,7 +119,7 @@ void	parsing_params(int fd, t_params *p)
 **	@param	s		pointer to string
 **	@param	p		pointer to structure to save different parametrs
 */
-void	parsing_line(char *s, t_params *p)
+void	parsing_line(char *s, t_param *p)
 {
 	if (!ft_strncmp(s, "R ", 2))
 		get_resolution(s + 2, p);
@@ -132,5 +132,5 @@ void	parsing_line(char *s, t_params *p)
 		printf("cel %d , floor %d, res %d , %s + %s + %s + %s + %s\n", p->got_cel, p->got_floor,p->got_res , p->t_so ,p->t_we ,p->t_no , p->t_ea , p->t_sp);
 		ft_raise_error(ft_strjoin("Cannot parse string: ", s));
 	}
-	p->got_params = (p->got_cel && p->got_floor && p->got_res && p->t_so && p->t_we && p->t_no && p->t_ea && p->t_sp);
+	p->got_param = (p->got_cel && p->got_floor && p->got_res && p->t_so && p->t_we && p->t_no && p->t_ea && p->t_sp);
 }	

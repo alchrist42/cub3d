@@ -1,33 +1,35 @@
 #include "cub3d.h"
 
-void	change_position(t_params *p, t_player *plr, t_buttons *btn)
+void	change_pos(t_param *p, t_player *plr, t_button *btn, t_vector *vs)
 {
-	float	row;
-	float	col;
+	float		row;
+	float		col;
+	t_vector	v;
 
 	row = plr->y;
 	col = plr->x;
+	v = vs[plr->ind_v];
 	if (btn->w && !btn->s)
 	{
-		row += plr->vy * plr->speed;
-		col += plr->vx * plr->speed;
+		row += v.y * plr->speed;
+		col += v.x * plr->speed;
 		
 	}
 	if (btn->s && !btn->w)
 	{
-		row -= plr->vy * plr->speed;
-		col -= plr->vx * plr->speed;
+		row -= v.y * plr->speed;
+		col -= v.x * plr->speed;
 	}
 	if (btn->a && !btn->d)
 	{
-		row -= plr->vx * plr->speed;
-		col += plr->vy * plr->speed;
+		row -= v.x * plr->speed;
+		col += v.y * plr->speed;
 	}
 
 	if (btn->d && !btn->a)
 	{
-		row += plr->vx * plr->speed;
-		col -= plr->vy * plr->speed;
+		row += v.x * plr->speed;
+		col -= v.y * plr->speed;
 	}
 
 	if (p->map[(int)row][(int)col] != '1')
@@ -41,12 +43,22 @@ void	change_position(t_params *p, t_player *plr, t_buttons *btn)
 		plr->x = col;
 }
 
-void	rotate_view(t_params *p, t_player *plr, t_buttons *btn)
+void	rotate_view(t_param *p, t_player *plr, t_button *btn, t_data *img) //del img
 {	
 	if (btn->q && !btn->e)
-		rotate_by_ange(&plr->vx, &plr->vy, -p->sin_a, p->cos_a);
+		plr->ind_v -= plr->rotate_speed;
+		// rotate_by_ange(&plr->vx, &plr->vy, -p->sin_a, p->cos_a);
+
 	if (btn->e && !btn->q)
-		rotate_by_ange(&plr->vx, &plr->vy, p->sin_a, p->cos_a);
+		plr->ind_v += plr->rotate_speed;
+		// rotate_by_ange(&plr->vx, &plr->vy, p->sin_a, p->cos_a);
+		// (void)img;
+	if (plr->ind_v >= p->cnt_v)
+		plr->ind_v -= p->cnt_v;
+	else if (plr->ind_v < 0)
+		plr->ind_v += p->cnt_v;
+	plr->vx = img->v[plr->ind_v].x;
+	plr->vy = img->v[plr->ind_v].y;
 }
 
 void	rotate_by_ange(double *x, double *y, double sin_a, double cos_a)

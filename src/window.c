@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void	create_window(t_data *img, t_params *p, t_buttons *btn)
+void	create_window(t_data *img, t_param *p, t_button *btn)
 {
 
 	
@@ -9,7 +9,7 @@ void	create_window(t_data *img, t_params *p, t_buttons *btn)
 	img->win = mlx_new_window(img->mlx, p->res_x, p->res_y, "Cub3D");
 	img->img = mlx_new_image(img->mlx, p->res_x, p->res_y);
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->llen, &img->end);
-	img->params = p;
+	img->param = p;
 	img->btn = btn;
 }
 
@@ -34,7 +34,7 @@ int	close_win(t_data *img)
 **	@param	p		pointer to structure of parameters
 **	@return	int		has no return value
 */
-void	correct_resolution(t_data *img, t_params *p)
+void	correct_resolution(t_data *img, t_param *p)
 {
 	int	x;
 	int	y;
