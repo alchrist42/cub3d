@@ -86,10 +86,7 @@ void	get_colors(char *s, bool is_floor, t_param *p)
 */
 void	get_texture(char *s, t_param *p)
 {
-	int	fd;
-
-	fd = open(s + 2, O_RDONLY);
-	// if (fd < 0)
+	
 	// 	ft_raise_error("Missing texture file\n");
 	if (!ft_strncmp(s, "NO ", 3))
 		p->t_no = ft_strdup(s + 3); //todo del strdup
@@ -105,5 +102,5 @@ void	get_texture(char *s, t_param *p)
 		ft_raise_error("Impossible error!\n");
 	s[2] = 0;
 	if (DEBUG)
-		printf("get TEXTURE %i for %s from %s\n", fd, s, s + 3);
+		printf("get TEXTURE  for %s from %s\n", s, s + 3);
 }

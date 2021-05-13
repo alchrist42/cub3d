@@ -22,16 +22,25 @@ void	get_img(t_param *p, t_data *img)
 
 void	put_column(t_param *p, t_data *img, int col, int up, int down)
 {
-	int	row;
+	int		row;
+	int		*color;
+	int		w;
+	t_texture	xpm;
 
+	xpm = img->xpm[img->plr->texture_ind];
+	w = (xpm.bpp / 8) * (int)(xpm.w * fabs(img->plr->diff));
 	row = 0;
 	while (row <= up && row < p->res_y)
 		my_mlx_pixel_put(img, row++, col, p->cel);
 	while (row < down && row < p->res_y)
-		my_mlx_pixel_put(img, row++, col, 0x00225522);
+	{
+		color = (int *)(xpm.addr + xpm.llen * (int)((row - up) * xpm.h / (down - up)) + w);
+		my_mlx_pixel_put(img, row++, col, *color);
+	}
 	while (row < p->res_y)
 		my_mlx_pixel_put(img, row++, col, p->floor);
 }
+
 
 float	get_dist_to_wall(t_data *img, t_vector vray)
 {
@@ -47,8 +56,21 @@ float	get_dist_to_wall(t_data *img, t_vector vray)
 	while (++i < 300)
 	{
 		
-		if (img->param->map[(int)(dot.y + 0.000001 * vray.ry)][(int)(dot.x + 0.000001 * vray.cx )] == '1')
+		if (img->param->map[(int)(dot.y + 0.000001 * vray.ry)][(int)(dot.x)] == '1'
+		|| img->param->map[(int)(dot.y)][(int)(dot.x + 0.000001 * vray.cx )] == '1')
+		{
+			if (dot.x - (int)dot.x < dot.y - (int)dot.y)
+			{
+				img->plr->diff = dot.y - (int)dot.y;
+				img->plr->texture_ind = (vray.rx > 0);
+			}
+			else
+			{
+				img->plr->diff = dot.x - (int)dot.x;
+				img->plr->texture_ind = 2 + (vray.ry > 0);
+			}
 			return (sqrt((dot.y - img->plr->y) * (dot.y - img->plr->y) + (dot.x - img->plr->x) * (dot.x - img->plr->x)));
+		}
 		if (fabs(d1.x - img->plr->x) + fabs(d1.y - img->plr->y) < fabs(d2.x - img->plr->x) + fabs(d2.y - img->plr->y))
 		{
 			dot.y = d1.y;

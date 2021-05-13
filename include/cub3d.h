@@ -42,6 +42,12 @@ typedef struct	s_player
 	float	x;
 	float	y;
 	float	z;
+	float	dot_x; //del
+	float	dot_y;
+	float	dot_z;
+
+	float	diff;
+	int		texture_ind;
 	double	vx;
 	double	vy;
 	double	vz;
@@ -98,6 +104,17 @@ typedef struct s_param
 	double	cos_step;
 }	t_param;
 
+typedef struct s_texture
+{
+	void	*img;
+	char	*addr;
+	int		w;
+	int		h;
+	int		bpp;
+	int		llen;
+	int		end;
+}	t_texture;
+
 typedef struct	s_data {
 	void		*mlx;
 	void		*win;
@@ -106,7 +123,9 @@ typedef struct	s_data {
 	int			bpp;
 	int			llen;
 	int			end;
-	
+
+
+	t_texture	xpm[5];
 	t_param 	*param;
 	t_player	*plr;
 	t_button	*btn;
@@ -155,6 +174,7 @@ void	check_field(t_param *p);
 void	create_window(t_data *img, t_param *p, t_button *btn);
 int		close_win(t_data *img);
 void	correct_resolution(t_data *img, t_param *p);
+void	get_textures(t_data *img, t_texture *xpm, t_param *p);
 
 // get_img.c
 void	get_img(t_param *p, t_data *img);
