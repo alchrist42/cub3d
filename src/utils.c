@@ -14,6 +14,13 @@ int		ft_min(int a, int b)
 	return (a);
 }
 
+int		ft_max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
 int		ft_abs(int a)
 {
 	if (a > 0)

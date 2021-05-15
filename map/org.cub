@@ -1,4 +1,4 @@
-R 1600 1200
+R 1220 2000
 NO ./textures/wall1h.xpm
 SO ./textures/wall1v.xpm
 WE ./textures/wall2h.xpm

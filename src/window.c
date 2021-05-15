@@ -45,7 +45,7 @@ void	correct_resolution(t_data *img, t_param *p)
 	p->res_y = ft_min(y, p->res_y);
 	p->sin_a = sin(M_PI / 60);
 	p->cos_a = cos(M_PI / 60);
-	p->angle_x = M_PI / 2.5;
+	p->angle_x = M_PI / 3;
 	p->angle_y = p->angle_x * p->res_y / p->res_x;
 	p->angle_step = p->angle_x / p->res_x;
 

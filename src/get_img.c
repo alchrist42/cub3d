@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void	get_img(t_param *p, t_data *img) 
+void	draw_walls(t_param *p, t_data *img) 
 {
 	int		col;
 	int		wall_h;
@@ -14,10 +14,23 @@ void	get_img(t_param *p, t_data *img)
 	while(col < p->res_x)
 	{
 		dst = get_dist_to_wall(img, img->v[start_ind + col]);
+		// dst = log(start_ind);
 		wall_h = p->res_x / 3 / dst / img->v[ft_abs(p->res_x / 2 - col)].x;
 		put_column(p, img, col, p->res_y / 2 - wall_h, p->res_y / 2 + wall_h);
 		col++;
 	}
+}
+
+void	draw_floor_and_cel(t_param *p, t_data *img)
+{
+	int	i;
+
+	i = 0;
+	while (i < p->res_y / 2)
+		my_mlx_row_put(img, i++, p->cel);
+	while (i < p->res_y)
+		my_mlx_row_put(img, i++, p->floor);
+
 }
 
 void	put_column(t_param *p, t_data *img, int col, int up, int down)
@@ -30,16 +43,18 @@ void	put_column(t_param *p, t_data *img, int col, int up, int down)
 	xpm = img->xpm[img->plr->texture_ind];
 	w = (xpm.bpp / 8) * (int)(xpm.w * fabs(img->plr->diff));
 	row = 0;
-	while (row <= up && row < p->res_y)
-		my_mlx_pixel_put(img, row++, col, p->cel);
+	// while (row <= up && row < p->res_y)
+	// 	my_mlx_pixel_put(img, row++, col, p->cel);
+	row = ft_max(up, 0); 
 	while (row < down && row < p->res_y)
 	{
 		color = (int *)(xpm.addr + xpm.llen * (int)((row - up) * xpm.h / (down - up)) + w);
 		my_mlx_pixel_put(img, row++, col, *color);
 	}
-	while (row < p->res_y)
-		my_mlx_pixel_put(img, row++, col, p->floor);
+	// while (row < p->res_y)
+	// 	my_mlx_pixel_put(img, row++, col, p->floor);
 }
+
 
 
 float	get_dist_to_wall(t_data *img, t_vector vray)

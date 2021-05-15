@@ -22,6 +22,17 @@ void	my_mlx_pixel_put(t_data *data, int row, int col, int color)
 	*(unsigned int*)dst = color;
 }
 
+void	my_mlx_row_put(t_data *data, int row, int color)
+{
+	unsigned int	*dst;
+	int				i;
+
+	i = 0;
+	dst = (unsigned int *)(data->addr + row * data->llen);
+	while(i < data->param->res_x)
+		dst[i++] = color;
+}
+
 void	draw_mmap(t_param *p, t_data	*img)
 {
 	int x;
@@ -103,7 +114,7 @@ void	pe4em_vectora(t_data *img, t_param *p)
 	double	sin_step;
 	double	cos_step;
 
-	p->cnt_v = p->res_x * 5;
+	p->cnt_v = p->res_x * 6;
 	if (p->cnt_v < 360)
 		p->cnt_v = 360;
 	

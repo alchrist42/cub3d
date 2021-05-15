@@ -132,6 +132,13 @@ typedef struct	s_data {
 	t_vector	*v;
 }				t_data;
 
+typedef	struct s_sprite
+{
+	t_texture	*texture;
+	int			height;
+	int			diff;
+}	t_sprite;
+
 typedef struct s_dot
 {
 	float	x;
@@ -146,6 +153,7 @@ void	ft_raise_error(char *s);
 //utils.c
 int		ft_abs(int a);
 int		ft_min(int a, int b);
+int		ft_max(int a, int b);
 
 // parcer_utils.c
 int		ft_arrlen(char **arr);
@@ -177,7 +185,8 @@ void	correct_resolution(t_data *img, t_param *p);
 void	get_textures(t_data *img, t_texture *xpm, t_param *p);
 
 // get_img.c
-void	get_img(t_param *p, t_data *img);
+void	draw_floor_and_cel(t_param *p, t_data *img);
+void	draw_walls(t_param *p, t_data *img);
 void	put_column(t_param *p, t_data *img, int col, int up, int down);
 void	get_first_cross(t_data *img, t_vector *vray, t_dot *dot, t_dot *d1, t_dot *d2);
 float	get_dist_to_wall(t_data *img, t_vector vray);
@@ -186,6 +195,7 @@ float	get_dist_to_wall(t_data *img, t_vector vray);
 
 // get_img_helpers.c
 void	my_mlx_pixel_put(t_data *data, int row, int col, int color);
+void	my_mlx_row_put(t_data *data, int row, int color);
 void	draw_mmap(t_param *p, t_data	*img);
 int		create_trgb(int t, int r, int g, int b);
 int		both_equal_sign(float x, float y);
