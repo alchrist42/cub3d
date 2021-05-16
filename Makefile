@@ -9,6 +9,7 @@ SRCS_FILES	= 	main.c \
 				window.c \
 				game.c \
 				hooks.c \
+				rays.c \
 				get_img.c \
 				get_img_helpers.c \
 				player.c \

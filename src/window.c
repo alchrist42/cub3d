@@ -43,16 +43,16 @@ void	correct_resolution(t_data *img, t_param *p)
 	mlx_get_screen_size(img->mlx, &x, &y);
 	p->res_x = ft_min(x, p->res_x);
 	p->res_y = ft_min(y, p->res_y);
-	p->sin_a = sin(M_PI / 60);
-	p->cos_a = cos(M_PI / 60);
-	p->angle_x = M_PI / 3;
-	p->angle_y = p->angle_x * p->res_y / p->res_x;
-	p->angle_step = p->angle_x / p->res_x;
+	// p->sin_a = sin(M_PI / 60);
+	// p->cos_a = cos(M_PI / 60);
+	// p->angle_x = M_PI / 3;
+	// p->angle_y = p->angle_x * p->res_y / p->res_x;
+	// p->angle_step = p->angle_x / p->res_x;
 
-	p->start_sin = sin(p->angle_x / 2);
-	p->start_cos = cos(p->angle_x / 2);
-	p->sin_step = sin(p->angle_step);
-	p->cos_step = cos(p->angle_step);
+	// p->start_sin = sin(p->angle_x / 2);
+	// p->start_cos = cos(p->angle_x / 2);
+	// p->sin_step = sin(p->angle_step);
+	// p->cos_step = cos(p->angle_step);
 }
 
 void	get_textures(t_data *img, t_texture *xpm, t_param *p)

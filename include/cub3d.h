@@ -37,6 +37,24 @@ typedef struct	s_vector
 	double	cy;
 }	t_vector;
 
+typedef struct s_texture
+{
+	void	*img;
+	char	*addr;
+	int		w;
+	int		h;
+	int		bpp;
+	int		llen;
+	int		end;
+}	t_texture;
+
+typedef	struct s_sprite
+{
+	t_texture	*xpm;
+	float		h;
+	float		diff;
+}	t_sprite;
+
 typedef struct	s_player
 {
 	float	x;
@@ -48,6 +66,10 @@ typedef struct	s_player
 
 	float	diff;
 	int		texture_ind;
+
+	t_sprite 	sprite[100];
+	int			n_spr;
+
 	double	vx;
 	double	vy;
 	double	vz;
@@ -104,16 +126,7 @@ typedef struct s_param
 	double	cos_step;
 }	t_param;
 
-typedef struct s_texture
-{
-	void	*img;
-	char	*addr;
-	int		w;
-	int		h;
-	int		bpp;
-	int		llen;
-	int		end;
-}	t_texture;
+
 
 typedef struct	s_data {
 	void		*mlx;
@@ -132,12 +145,7 @@ typedef struct	s_data {
 	t_vector	*v;
 }				t_data;
 
-typedef	struct s_sprite
-{
-	t_texture	*texture;
-	int			height;
-	int			diff;
-}	t_sprite;
+
 
 typedef struct s_dot
 {
@@ -154,6 +162,7 @@ void	ft_raise_error(char *s);
 int		ft_abs(int a);
 int		ft_min(int a, int b);
 int		ft_max(int a, int b);
+
 
 // parcer_utils.c
 int		ft_arrlen(char **arr);
@@ -188,10 +197,13 @@ void	get_textures(t_data *img, t_texture *xpm, t_param *p);
 void	draw_floor_and_cel(t_param *p, t_data *img);
 void	draw_walls(t_param *p, t_data *img);
 void	put_column(t_param *p, t_data *img, int col, int up, int down);
+void	put_column2(t_param *p, t_data *img, t_sprite *spr, int col, float k);
+
+// rays.c
+int		check_cell(t_data *img, t_vector vray, t_dot *dot);
 void	get_first_cross(t_data *img, t_vector *vray, t_dot *dot, t_dot *d1, t_dot *d2);
 float	get_dist_to_wall(t_data *img, t_vector vray);
-
-
+float	ft_dist(float a, float b);
 
 // get_img_helpers.c
 void	my_mlx_pixel_put(t_data *data, int row, int col, int color);

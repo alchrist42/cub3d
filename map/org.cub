@@ -1,9 +1,9 @@
-R 1220 2000
-NO ./textures/wall1h.xpm
-SO ./textures/wall1v.xpm
-WE ./textures/wall2h.xpm
-EA ./textures/wall2v.xpm
-S ./textures/WALL33.xpm
+R 1820 1000
+NO ./textures/NO.xpm
+SO ./textures/SO.xpm
+WE ./textures/WE.xpm
+EA ./textures/EA.xpm
+S ./textures/imp1.xpm
 F 220,100,0
 C 225,30,0
         1111111111111111111111111

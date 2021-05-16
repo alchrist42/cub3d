@@ -27,3 +27,8 @@ int		ft_abs(int a)
 		return (a);
 	return (-a);
 }
+
+float	ft_dist(float a, float b)
+{
+	return (sqrt(a * a + b * b));
+}
