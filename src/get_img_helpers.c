@@ -48,8 +48,6 @@ void	draw_mmap(t_param *p, t_data	*img)
 			ch = p->map[x*3 * p->h_map / p->res_y][y * 2 * p->w_map / p->res_x];
 			if (ch == '1')
 				my_mlx_pixel_put(img, x, y, 0x004F204F);
-			// else if (char_in_str(ch, "NEWS"))
-			// 	my_mlx_pixel_put(img, y, x, 0x0F009F00);
 			else if (char_in_str(ch, "2"))
 				my_mlx_pixel_put(img, x, y, 0x00008000);
 			else
@@ -58,7 +56,6 @@ void	draw_mmap(t_param *p, t_data	*img)
 		}
 		x++;
 	}
-	
 }
 
 void	draw_player(t_param *p, t_data *img)
@@ -89,7 +86,6 @@ void	draw_ray_of_sight(t_param *p, t_data *img)
 
 	row = img->plr->y * p->res_y / (p->h_map * 3);
 	col = img->plr->x * p->res_x / (p->w_map * 2);
-	// printf("row=%f, col=%f\n", row, col);
 	while (i < 100 && col > 1 && col < p->res_x && row > 1 && row < p->res_y)
 	{
 		my_mlx_pixel_put(img, row, col, 0x00BB305F);
@@ -108,8 +104,6 @@ int	prepare_frame(t_data *img)
 
 void	pe4em_vectora(t_data *img, t_param *p)
 {
-
-
 	int i;
 	double	sin_step;
 	double	cos_step;
@@ -117,15 +111,15 @@ void	pe4em_vectora(t_data *img, t_param *p)
 	p->cnt_v = p->res_x * 6;
 	if (p->cnt_v < 360)
 		p->cnt_v = 360;
-	
 	sin_step = sin(M_PI * 2 / p->cnt_v);
 	cos_step = cos(M_PI * 2 / p->cnt_v);
-
 	img->v = malloc(sizeof(*img->v) * p->cnt_v * 1.21);
+	if (!img->v)
+		ft_raise_error("Allocation error\n");
 	i = 0;
 	img->v[i].x = 1;
 	img->v[i].y = 0;
-	while (++i < p->cnt_v * 1.21)
+	while (++i < p->cnt_v * 1.2)
 	{
 		img->v[i].x = img->v[i - 1].x;
 		img->v[i].y = img->v[i - 1].y;
@@ -139,10 +133,4 @@ void	pe4em_vectora(t_data *img, t_param *p)
 			img->v[i].ry = -1;
 		img->v[i].rx = img->v[i].x / img->v[i].y * img->v[i].ry;
 	}
-	printf("zapekli vectorov: %d, first: %f %f\n", i, img->v[1].x, img->v[1].y);
-	i--;
-	rotate_by_ange(&img->v[i].x, &img->v[i].y, sin_step, cos_step);
-	printf("zapekli vectorov: %d, last: %f %f\n", p->cnt_v, img->v[i].x, img->v[i].y);
-
-
 }

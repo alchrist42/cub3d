@@ -67,7 +67,7 @@ typedef struct	s_player
 	float	diff;
 	int		texture_ind;
 
-	t_sprite 	sprite[100];
+	t_sprite 	sprite[200];
 	int			n_spr;
 
 	double	vx;
@@ -196,13 +196,13 @@ void	get_textures(t_data *img, t_texture *xpm, t_param *p);
 // get_img.c
 void	draw_floor_and_cel(t_param *p, t_data *img);
 void	draw_walls(t_param *p, t_data *img);
-void	put_column(t_param *p, t_data *img, int col, int up, int down);
-void	put_column2(t_param *p, t_data *img, t_sprite *spr, int col, float k);
+void	put_column(t_param *p, t_data *img, t_sprite *spr, int col, float k);
+// void	put_column2(t_param *p, t_data *img, t_sprite *spr, int col, float k);
 
 // rays.c
 int		check_cell(t_data *img, t_vector vray, t_dot *dot);
 void	get_first_cross(t_data *img, t_vector *vray, t_dot *dot, t_dot *d1, t_dot *d2);
-float	get_dist_to_wall(t_data *img, t_vector vray);
+void	throw_ray(t_data *img, t_vector vray);
 float	ft_dist(float a, float b);
 
 // get_img_helpers.c

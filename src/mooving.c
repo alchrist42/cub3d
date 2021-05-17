@@ -4,42 +4,54 @@ void	change_pos(t_param *p, t_player *plr, t_button *btn, t_vector *vs)
 {
 	float		row;
 	float		col;
+	float		row2;
+	float		col2;
 	t_vector	v;
 
 	row = plr->y;
 	col = plr->x;
+	row2 = row;
+	col2 = col;
 	v = vs[plr->ind_v];
 	if (btn->w && !btn->s)
 	{
 		row += v.y * plr->speed;
 		col += v.x * plr->speed;
+		row2 += v.y * 2 * plr->speed;
+		col2 += v.x * 2 * plr->speed;
 		
 	}
 	if (btn->s && !btn->w)
 	{
 		row -= v.y * plr->speed;
 		col -= v.x * plr->speed;
+		row2 -= v.y * 2 * plr->speed;
+		col2 -= v.x * 2 * plr->speed;
 	}
 	if (btn->a && !btn->d)
 	{
 		row -= v.x * plr->speed;
 		col += v.y * plr->speed;
+		row2 -= v.x * 2 * plr->speed;
+		col2 += v.y * 2 * plr->speed;
 	}
 
 	if (btn->d && !btn->a)
 	{
 		row += v.x * plr->speed;
 		col -= v.y * plr->speed;
+		row2 += v.x * 2 * plr->speed;
+		col2 -= v.y * 2 * plr->speed;
 	}
 
-	if (p->map[(int)row][(int)col] != '1')
+	if (p->map[(int)row][(int)col] != '1' && p->map[(int)row2][(int)col2] != '1' && p->map[(int)plr->y][(int)col2] != '1' && p->map[(int)row2][(int)plr->x] != '1')
 	{
 		plr->y = row;
 		plr->x = col;
 	}
-	else if (p->map[(int)row][(int)plr->x] != '1')
+	else if (p->map[(int)row][(int)plr->x] != '1' && p->map[(int)row2][(int)plr->x] != '1')
 		plr->y = row;
-	else if (p->map[(int)plr->y][(int)col] != '1')
+	else if (p->map[(int)plr->y][(int)col] != '1' && p->map[(int)plr->y][(int)col2] != '1')
 		plr->x = col;
 }
 
