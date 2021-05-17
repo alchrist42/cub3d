@@ -32,27 +32,49 @@ void	draw_floor_and_cel(t_param *p, t_data *img)
 void	put_column(t_param *p, t_data *img, t_sprite *spr, int col, float k)
 {
 	int		row;
-	int		*color;
-	int		w;
+	int		color;
 	int		up;
-	int		down;
-	// t_texture	*xpm;
+	t_texture	*xpm;
+	int row_sp;
+	(void)row_sp;
 
 	int i = img->plr->n_spr;
 	while (i--)
 	{
 		// xpm = spr[i].xpm;
-		w = (spr[i].xpm->bpp / 8) * (int)(spr[i].xpm->w * (spr[i].diff));
-		up = p->res_y / 2 - spr[i].h / k;
-		down = p->res_y / 2 + spr[i].h / k;
-		row = ft_max(up, 0);
+		// w = (spr[i].xpm->bpp / 8) * (int)(spr[i].xpm->w * (spr[i].diff));
+		// up = p->res_y / 2 - spr[i].h / k / 2;
+		// down = p->res_y / 2 + spr[i].h / k / 2;
+		// row = ft_max(up, 0);
 		
-		while (row < down && row < p->res_y)
+		// while (row < down && row < p->res_y)
+		// {
+		// 	color = (int *)(spr[i].xpm->addr + spr[i].xpm->llen * (int)((row - up) * spr[i].xpm->h / (down - up)) + w);
+		// 	if (*color != 0x980088)
+		// 		my_mlx_pixel_put(img, row, col, *color);
+		// 	row++;
+		// }
+		// (void)row_sp;
+
+		xpm = spr[i].xpm;
+		
+		spr[i].h /= k;
+		up = (p->res_y - spr[i].h) / 2;
+		
+		row_sp = ft_max(0, (xpm->h - xpm->h * p->res_y / spr[i].h) / 2);
+		row = up + row_sp * spr[i].h / xpm->h;
+		while (row_sp < xpm->h)
 		{
-			color = (int *)(spr[i].xpm->addr + spr[i].xpm->llen * (int)((row - up) * spr[i].xpm->h / (down - up)) + w);
-			if (*color != 0x980088)
-				my_mlx_pixel_put(img, row, col, *color);
-			row++;
+			if (row  > p->res_y)
+				break;
+			color = my_mlx_pixel_get(xpm, row_sp, spr[i].diff);
+			while (row < p->res_y  && row < up + row_sp * spr[i].h / xpm->h)
+			{
+				if (color != 0x980088 && row >= 0)
+					my_mlx_pixel_put(img, row, col, color);
+				row++;
+			}
+			row_sp++;
 		}
 	}
 }

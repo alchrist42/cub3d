@@ -208,6 +208,7 @@ float	ft_dist(float a, float b);
 // get_img_helpers.c
 void	my_mlx_pixel_put(t_data *data, int row, int col, int color);
 void	my_mlx_row_put(t_data *data, int row, int color);
+int	my_mlx_pixel_get(t_texture *xpm, int row_sp, float diff);
 void	draw_mmap(t_param *p, t_data	*img);
 int		create_trgb(int t, int r, int g, int b);
 int		both_equal_sign(float x, float y);

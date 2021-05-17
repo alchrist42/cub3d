@@ -12,6 +12,7 @@ void	run_game(t_data *img)
 
 int	main_game(t_data *img)
 {
+	mlx_destroy_image(img->mlx, img->img);
 	img->img = mlx_new_image(img->mlx, img->param->res_x, img->param->res_y);
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->llen, &img->end);
 

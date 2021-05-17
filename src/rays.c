@@ -14,7 +14,7 @@ int	check_cell(t_data *img, t_vector vray, t_dot *dot)
 		img->plr->sprite[img->plr->n_spr].diff = 0.5 + (vray.cx * (dot->y - (int)dot->y - 0.5) - vray.cy * (dot->x - (int)(dot->x + 0.000001 * vray.cx) - 0.5)) / ft_dist(vray.cx, vray.cy);
 		img->plr->sprite[img->plr->n_spr].xpm = &img->xpm[4];
 		if (img->plr->sprite[img->plr->n_spr].diff > 0 && img->plr->sprite[img->plr->n_spr].diff < 1)
-			img->plr->sprite[img->plr->n_spr++].h = img->param->res_x / 2 / (ft_dist((int)dot->y + 0.5 - img->plr->y , (int)(dot->x + 0.000001 * vray.cx ) + 0.5 - img->plr->x));
+			img->plr->sprite[img->plr->n_spr++].h = img->param->res_x / (ft_dist((int)dot->y + 0.5 - img->plr->y , (int)(dot->x + 0.000001 * vray.cx ) + 0.5 - img->plr->x));
 		return (img->plr->n_spr > 198);
 	}
 	else if (cell_y == '2')	
@@ -22,7 +22,7 @@ int	check_cell(t_data *img, t_vector vray, t_dot *dot)
 		img->plr->sprite[img->plr->n_spr].diff = 0.5 + (vray.rx * (-(int)(dot->y + 0.000001 * vray.ry) + dot->y - 0.5) - vray.ry * (dot->x - (int)(dot->x) - 0.5)) / ft_dist(vray.rx, vray.ry);
 		img->plr->sprite[img->plr->n_spr].xpm = &img->xpm[4];
 		if (img->plr->sprite[img->plr->n_spr].diff > 0 && img->plr->sprite[img->plr->n_spr].diff < 1)
-			img->plr->sprite[img->plr->n_spr++].h = img->param->res_x / 2 / (ft_dist((int)(dot->y + 0.000001 * vray.ry) + 0.5 - img->plr->y, (int)dot->x  + 0.5 - img->plr->x));
+			img->plr->sprite[img->plr->n_spr++].h = img->param->res_x  / (ft_dist((int)(dot->y + 0.000001 * vray.ry) + 0.5 - img->plr->y, (int)dot->x  + 0.5 - img->plr->x));
 		return (img->plr->n_spr > 198);
 	}
 	else if (cell_x == '1' || cell_y == '1')
@@ -37,7 +37,7 @@ int	check_cell(t_data *img, t_vector vray, t_dot *dot)
 			img->plr->sprite[img->plr->n_spr].diff = dot->x - (int)dot->x;
 			img->plr->sprite[img->plr->n_spr].xpm = &img->xpm[2 + (vray.ry > 0)];
 		}
-		img->plr->sprite[img->plr->n_spr++].h = img->param->res_x / 2 / (ft_dist(dot->y - img->plr->y, dot->x - img->plr->x));
+		img->plr->sprite[img->plr->n_spr++].h = img->param->res_x  / (ft_dist(dot->y - img->plr->y, dot->x - img->plr->x));
 	}
 
 	return (cell_x == '1' || cell_y == '1');

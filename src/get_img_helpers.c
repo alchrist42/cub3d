@@ -33,6 +33,16 @@ void	my_mlx_row_put(t_data *data, int row, int color)
 		dst[i++] = color;
 }
 
+int	my_mlx_pixel_get(t_texture *xpm, int row_sp, float diff)
+{
+	int *color;
+
+	color = (int *)(xpm->addr + xpm->llen * row_sp
+			+ (xpm->bpp / 8) * (int)(xpm->w * diff));
+
+	return (*color);
+}
+
 void	draw_mmap(t_param *p, t_data	*img)
 {
 	int x;
