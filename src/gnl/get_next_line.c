@@ -2,19 +2,20 @@
 
 int	get_next_line(int fd, char **line)
 {
-	int result;
-	int i;
+	int	result;
+	int	i;
 
 	i = 0;
 	*line = malloc(4 * 1024 * 1024);
 	if (!line)
 		return (-1);
-	while ((result = read(fd, *line + i, CONTENT_MIN_SIZE)))
+	while (1
+		&& (result = read(fd, *line + i, CONTENT_MIN_SIZE)))
 	{
 		if (result == -1)
 			return (-1);
 		if ((*line)[i] == '\n')
-			break;
+			break ;
 		i++;
 	}
 	(*line)[i] = 0;
