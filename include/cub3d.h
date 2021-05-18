@@ -27,6 +27,8 @@
 # define KEY_E 14
 # define KEY_ESC 53
 
+# define TRNS 0x980088
+
 typedef struct	s_vector
 {
 	double	x;
@@ -68,7 +70,7 @@ typedef struct	s_player
 	int		texture_ind;
 
 	t_sprite 	sprite[200];
-	int			n_spr;
+	int			cnt_s;
 
 	double	vx;
 	double	vy;
@@ -139,7 +141,7 @@ typedef struct	s_data {
 
 
 	t_texture	xpm[5];
-	t_param 	*param;
+	t_param 	*p;
 	t_player	*plr;
 	t_button	*btn;
 	t_vector	*v;
@@ -162,7 +164,7 @@ void	ft_raise_error(char *s);
 int		ft_abs(int a);
 int		ft_min(int a, int b);
 int		ft_max(int a, int b);
-
+void	rotate_by_ange(double *x, double *y, double sin_a, double cos_a);
 
 // parcer_utils.c
 int		ft_arrlen(char **arr);
@@ -196,7 +198,8 @@ void	get_textures(t_data *img, t_texture *xpm, t_param *p);
 // get_img.c
 void	draw_floor_and_cel(t_param *p, t_data *img);
 void	draw_walls(t_param *p, t_data *img);
-void	put_column(t_param *p, t_data *img, t_sprite *spr, int col, float k);
+void	put_column(t_data *img, t_sprite *spr, int col, int i);
+void	put_pixel_column(t_data *img, int col, int up, int down, int color);
 // void	put_column2(t_param *p, t_data *img, t_sprite *spr, int col, float k);
 
 // rays.c
@@ -206,16 +209,16 @@ void	throw_ray(t_data *img, t_vector vray);
 float	ft_dist(float a, float b);
 
 // get_img_helpers.c
-void	my_mlx_pixel_put(t_data *data, int row, int col, int color);
-void	my_mlx_row_put(t_data *data, int row, int color);
-int	my_mlx_pixel_get(t_texture *xpm, int row_sp, float diff);
+void	my_mlx_pixel_put(t_data *img, int row, int col, int color);
+void	my_mlx_row_put(t_data *img, int row, int color);
+int		get_pixel(t_texture *xpm, int row_sp, float diff);
 void	draw_mmap(t_param *p, t_data	*img);
 int		create_trgb(int t, int r, int g, int b);
 int		both_equal_sign(float x, float y);
 void	pe4em_vectora(t_data *img, t_param *p);
 
 
-int 	prepare_frame(t_data *img);
+// minimap_bonus
 void	draw_player(t_param *p, t_data *img);
 void	draw_ray_of_sight(t_param *p, t_data *img);
 
@@ -232,8 +235,11 @@ void	inicialise_buttons(t_button *btn);
 void	initialise_player(t_data *img, t_param *p, t_player *plr);
 
 // mooving.c
-void	change_pos(t_param *p, t_player *plr, t_button *btn, t_vector *vs);
-void	rotate_view(t_param *p, t_player *plr, t_button *btn, t_data *img);
-void	rotate_by_ange(double *x, double *y, double sin_a, double cos_a);
+void	change_pos(char **map, t_player *plr, t_button *btn, t_vector *vs);
+void	rotate_view(t_param *p, t_player *plr, t_button *btn);
+void	forward_mov(t_vector *v, float speed, float *row, float *col);
+void	sideways_mov(t_vector *v, float speed, float *row, float *col);
+void	check_and_change(char **map, t_player *plr, float row, float col);
+
 
 #endif

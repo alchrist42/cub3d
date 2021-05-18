@@ -32,3 +32,12 @@ float	ft_dist(float a, float b)
 {
 	return (sqrt(a * a + b * b));
 }
+
+void	rotate_by_ange(double *x, double *y, double sin_a, double cos_a)
+{
+	double	copy_x;
+
+	copy_x = *x;
+	*x = copy_x * cos_a - *y * sin_a;
+	*y = copy_x * sin_a + *y * cos_a;
+}

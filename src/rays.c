@@ -5,39 +5,39 @@ int	check_cell(t_data *img, t_vector vray, t_dot *dot)
 	char cell_x;
 	char	cell_y;
 
-	cell_x = img->param->map[(int)(dot->y)][(int)(dot->x + 0.0000001 * vray.cx)];
-	cell_y = img->param->map[(int)(dot->y + 0.0000001 * vray.ry)][(int)(dot->x)];
-	img->plr->sprite[img->plr->n_spr].xpm = &img->xpm[4];
+	cell_x = img->p->map[(int)(dot->y)][(int)(dot->x + 0.0000001 * vray.cx)];
+	cell_y = img->p->map[(int)(dot->y + 0.0000001 * vray.ry)][(int)(dot->x)];
+	img->plr->sprite[img->plr->cnt_s].xpm = &img->xpm[4];
 
 	if (cell_x == '2')
 	{
-		img->plr->sprite[img->plr->n_spr].diff = 0.5 + (vray.cx * (dot->y - (int)dot->y - 0.5) - vray.cy * (dot->x - (int)(dot->x + 0.000001 * vray.cx) - 0.5)) / ft_dist(vray.cx, vray.cy);
-		img->plr->sprite[img->plr->n_spr].xpm = &img->xpm[4];
-		if (img->plr->sprite[img->plr->n_spr].diff > 0 && img->plr->sprite[img->plr->n_spr].diff < 1)
-			img->plr->sprite[img->plr->n_spr++].h = img->param->res_x / (ft_dist((int)dot->y + 0.5 - img->plr->y , (int)(dot->x + 0.000001 * vray.cx ) + 0.5 - img->plr->x));
-		return (img->plr->n_spr > 198);
+		img->plr->sprite[img->plr->cnt_s].diff = 0.5 + (vray.cx * (dot->y - (int)dot->y - 0.5) - vray.cy * (dot->x - (int)(dot->x + 0.000001 * vray.cx) - 0.5)) / ft_dist(vray.cx, vray.cy);
+		img->plr->sprite[img->plr->cnt_s].xpm = &img->xpm[4];
+		if (img->plr->sprite[img->plr->cnt_s].diff > 0 && img->plr->sprite[img->plr->cnt_s].diff < 1)
+			img->plr->sprite[img->plr->cnt_s++].h = img->p->res_x / (ft_dist((int)dot->y + 0.5 - img->plr->y , (int)(dot->x + 0.000001 * vray.cx ) + 0.5 - img->plr->x));
+		return (img->plr->cnt_s > 198);
 	}
 	else if (cell_y == '2')	
 	{
-		img->plr->sprite[img->plr->n_spr].diff = 0.5 + (vray.rx * (-(int)(dot->y + 0.000001 * vray.ry) + dot->y - 0.5) - vray.ry * (dot->x - (int)(dot->x) - 0.5)) / ft_dist(vray.rx, vray.ry);
-		img->plr->sprite[img->plr->n_spr].xpm = &img->xpm[4];
-		if (img->plr->sprite[img->plr->n_spr].diff > 0 && img->plr->sprite[img->plr->n_spr].diff < 1)
-			img->plr->sprite[img->plr->n_spr++].h = img->param->res_x  / (ft_dist((int)(dot->y + 0.000001 * vray.ry) + 0.5 - img->plr->y, (int)dot->x  + 0.5 - img->plr->x));
-		return (img->plr->n_spr > 198);
+		img->plr->sprite[img->plr->cnt_s].diff = 0.5 + (vray.rx * (-(int)(dot->y + 0.000001 * vray.ry) + dot->y - 0.5) - vray.ry * (dot->x - (int)(dot->x) - 0.5)) / ft_dist(vray.rx, vray.ry);
+		img->plr->sprite[img->plr->cnt_s].xpm = &img->xpm[4];
+		if (img->plr->sprite[img->plr->cnt_s].diff > 0 && img->plr->sprite[img->plr->cnt_s].diff < 1)
+			img->plr->sprite[img->plr->cnt_s++].h = img->p->res_x  / (ft_dist((int)(dot->y + 0.000001 * vray.ry) + 0.5 - img->plr->y, (int)dot->x  + 0.5 - img->plr->x));
+		return (img->plr->cnt_s > 198);
 	}
 	else if (cell_x == '1' || cell_y == '1')
 	{
 		if (dot->x - (int)dot->x < dot->y - (int)dot->y)
 		{
-			img->plr->sprite[img->plr->n_spr].diff = dot->y - (int)dot->y;
-			img->plr->sprite[img->plr->n_spr].xpm = &img->xpm[(vray.rx > 0)];
+			img->plr->sprite[img->plr->cnt_s].diff = dot->y - (int)dot->y;
+			img->plr->sprite[img->plr->cnt_s].xpm = &img->xpm[(vray.rx > 0)];
 		}
 		else
 		{
-			img->plr->sprite[img->plr->n_spr].diff = dot->x - (int)dot->x;
-			img->plr->sprite[img->plr->n_spr].xpm = &img->xpm[2 + (vray.ry > 0)];
+			img->plr->sprite[img->plr->cnt_s].diff = dot->x - (int)dot->x;
+			img->plr->sprite[img->plr->cnt_s].xpm = &img->xpm[2 + (vray.ry > 0)];
 		}
-		img->plr->sprite[img->plr->n_spr++].h = img->param->res_x  / (ft_dist(dot->y - img->plr->y, dot->x - img->plr->x));
+		img->plr->sprite[img->plr->cnt_s++].h = img->p->res_x  / (ft_dist(dot->y - img->plr->y, dot->x - img->plr->x));
 	}
 
 	return (cell_x == '1' || cell_y == '1');
@@ -52,9 +52,9 @@ void	throw_ray(t_data *img, t_vector vray)
 	int		i;
 
 	get_first_cross(img, &vray, &dot, &d1, &d2);
-	my_mlx_pixel_put(img, dot.y * img->param->res_y / (img->param->h_map * 3), dot.x * img->param->res_x / (img->param->w_map * 2), 0x00BFF0FF);
+	// my_mlx_pixel_put(img, dot.y * img->p->res_y / (img->p->h_map * 3), dot.x * img->p->res_x / (img->p->w_map * 2), 0x00BFF0FF);
 
-	img->plr->n_spr = 0;
+	img->plr->cnt_s = 0;
 	i = -1;
 	while (++i < 300)
 	{
@@ -74,7 +74,7 @@ void	throw_ray(t_data *img, t_vector vray)
 			d2.y = (int)dot.y + vray.ry;
 			d2.x = dot.x + (d2.y - dot.y) * vray.rx * vray.ry;
 		}
-		my_mlx_pixel_put(img, dot.y * img->param->res_y / (img->param->h_map * 3), dot.x * img->param->res_x / (img->param->w_map * 2), 0x00BFB0FF);
+		// my_mlx_pixel_put(img, dot.y * img->p->res_y / (img->p->h_map * 3), dot.x * img->p->res_x / (img->p->w_map * 2), 0x00BFB0FF);
 	}
 	
 }

@@ -10,7 +10,7 @@ void	create_window(t_data *img, t_param *p, t_button *btn)
 	img->win = mlx_new_window(img->mlx, p->res_x, p->res_y, "Cub3D");
 	img->img = mlx_new_image(img->mlx, p->res_x, p->res_y);
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->llen, &img->end);
-	img->param = p;
+	img->p = p;
 	img->btn = btn;
 }
 

@@ -1,22 +1,40 @@
 #include "cub3d.h"
 
-void	draw_walls(t_param *p, t_data *img) 
+/**
+ * @brief puts sprites and walls to img
+ * 
+ * @param p 	pointer to structure with parameters
+ * @param img 	the mlx instance
+ */
+void	draw_walls(t_param *p, t_data *img)
 {
 	int		col;
 	int		start_ind;
-	
+	float	k;
+	int		i;
+
 	col = 0;
 	start_ind = img->plr->ind_v - p->res_x / 2;
 	if (start_ind < 0)
 		start_ind += p->cnt_v;
-	while(col < p->res_x)
+	while (col < p->res_x)
 	{
 		throw_ray(img, img->v[start_ind + col]);
-		put_column(p, img, img->plr->sprite, col, img->v[ft_abs(p->res_x / 2 - col)].x);
+		k = img->v[ft_abs(p->res_x / 2 - col)].x;
+		i = img->plr->cnt_s;
+		while (i--)
+			img->plr->sprite[i].h /= k;
+		put_column(img, img->plr->sprite, col, img->plr->cnt_s);
 		col++;
 	}
 }
 
+/**
+ * @brief fills in foolr and celling colors
+ * 
+ * @param p 	pointer to structure with parameters
+ * @param img 	the mlx instance
+ */
 void	draw_floor_and_cel(t_param *p, t_data *img)
 {
 	int	i;
@@ -26,77 +44,41 @@ void	draw_floor_and_cel(t_param *p, t_data *img)
 		my_mlx_row_put(img, i++, p->cel);
 	while (i < p->res_y)
 		my_mlx_row_put(img, i++, p->floor);
-
 }
 
-void	put_column(t_param *p, t_data *img, t_sprite *spr, int col, float k)
+/**
+ * @brief 	fills one column of image. 
+ * 			draws sprites pixels sequentially starting from the farthest
+ * 
+ * @param img 	the mlx instance
+ * @param spr 	sprite sequence
+ * @param col 	сolumn index
+ * @param i 	index last  sprite. just for nominette
+ */
+void	put_column(t_data *img, t_sprite *spr, int col, int i)
 {
-	int		row;
-	int		color;
-	int		up;
+	int			row_sp;
+	int			up;
+	int			down;
 	t_texture	*xpm;
-	int row_sp;
-	(void)row_sp;
+	int			color;
 
-	int i = img->plr->n_spr;
 	while (i--)
 	{
-		// xpm = spr[i].xpm;
-		// w = (spr[i].xpm->bpp / 8) * (int)(spr[i].xpm->w * (spr[i].diff));
-		// up = p->res_y / 2 - spr[i].h / k / 2;
-		// down = p->res_y / 2 + spr[i].h / k / 2;
-		// row = ft_max(up, 0);
-		
-		// while (row < down && row < p->res_y)
-		// {
-		// 	color = (int *)(spr[i].xpm->addr + spr[i].xpm->llen * (int)((row - up) * spr[i].xpm->h / (down - up)) + w);
-		// 	if (*color != 0x980088)
-		// 		my_mlx_pixel_put(img, row, col, *color);
-		// 	row++;
-		// }
-		// (void)row_sp;
-
 		xpm = spr[i].xpm;
-		
-		spr[i].h /= k;
-		up = (p->res_y - spr[i].h) / 2;
-		
-		row_sp = ft_max(0, (xpm->h - xpm->h * p->res_y / spr[i].h) / 2);
-		row = up + row_sp * spr[i].h / xpm->h;
-		while (row_sp < xpm->h)
+		down = (img->p->res_y - spr[i].h) / 2;
+		row_sp = -1;
+		while (++row_sp < xpm->h)
 		{
-			if (row  > p->res_y)
-				break;
-			color = my_mlx_pixel_get(xpm, row_sp, spr[i].diff);
-			while (row < p->res_y  && row < up + row_sp * spr[i].h / xpm->h)
-			{
-				if (color != 0x980088 && row >= 0)
-					my_mlx_pixel_put(img, row, col, color);
-				row++;
-			}
-			row_sp++;
+			up = ft_max(0, down);
+			down = ft_min(img->p->res_y, (img->p->res_y - spr[i].h) / 2
+					+ (row_sp + 1) * spr[i].h / xpm->h);
+			if (down >= 0 && up < img->p->res_y
+				&& (i + 1 == img->plr->cnt_s
+					|| spr[i].h / 2 < img->p->res_y)
+				&& (color = get_pixel(xpm, row_sp, spr[i].diff)) != TRNS)
+				while (up < down)
+					my_mlx_pixel_put(img, up++, col, color);
 		}
 	}
 }
-
-// void	put_column(t_param *p, t_data *img, int col, int up, int down)
-// {
-// 	int		row;
-// 	int		*color;
-// 	int		w;
-// 	t_texture	xpm;
-
-// 	xpm = img->xpm[img->plr->texture_ind];
-// 	w = (xpm.bpp / 8) * (int)(xpm.w * (img->plr->diff));
-// 	row = 0;
-// 	// while (row <= up && row < p->res_y)
-// 	// 	my_mlx_pixel_put(img, row++, col, p->cel);
-// 	row = ft_max(up, 0); 
-// 	while (row < down && row < p->res_y)
-// 	{
-// 		color = (int *)(xpm.addr + xpm.llen * (int)((row - up) * xpm.h / (down - up)) + w);
-// 		my_mlx_pixel_put(img, row++, col, *color);
-// 	}
-// 	// while (row < p->res_y)
-// 	// 	my_mlx_pixel_put(img, row++, col, p->floor);
-// }

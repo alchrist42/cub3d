@@ -35,6 +35,5 @@ int	release_button(int keycode, t_data *img)
 		img->btn->q = false;
 	else if (keycode == KEY_E || keycode == KEY_RIGHT)
 		img->btn->e = false;
-	
 	return (0);
 }

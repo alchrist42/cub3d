@@ -1,83 +1,103 @@
 #include "cub3d.h"
 
-void	change_pos(t_param *p, t_player *plr, t_button *btn, t_vector *vs)
+/*
+**	@brief	changes player position
+**	
+**	@param	map		pointer to map
+**	@param	plr		player structure
+**	@param	btn		button structure
+**	@param	vs		vectors massive
+*/
+void	change_pos(char **map, t_player *plr, t_button *btn, t_vector *vs)
 {
-	float		row;
-	float		col;
-	float		row2;
-	float		col2;
-	t_vector	v;
+	float	row;
+	float	col;
 
 	row = plr->y;
 	col = plr->x;
-	row2 = row;
-	col2 = col;
-	v = vs[plr->ind_v];
 	if (btn->w && !btn->s)
-	{
-		row += v.y * plr->speed;
-		col += v.x * plr->speed;
-		row2 += v.y * 2 * plr->speed;
-		col2 += v.x * 2 * plr->speed;
-		
-	}
+		forward_mov(&vs[plr->ind_v], plr->speed, &row, &col);
 	if (btn->s && !btn->w)
-	{
-		row -= v.y * plr->speed;
-		col -= v.x * plr->speed;
-		row2 -= v.y * 2 * plr->speed;
-		col2 -= v.x * 2 * plr->speed;
-	}
+		forward_mov(&vs[plr->ind_v], -plr->speed, &row, &col);
 	if (btn->a && !btn->d)
-	{
-		row -= v.x * plr->speed;
-		col += v.y * plr->speed;
-		row2 -= v.x * 2 * plr->speed;
-		col2 += v.y * 2 * plr->speed;
-	}
-
+		sideways_mov(&vs[plr->ind_v], plr->speed, &row, &col);
 	if (btn->d && !btn->a)
-	{
-		row += v.x * plr->speed;
-		col -= v.y * plr->speed;
-		row2 += v.x * 2 * plr->speed;
-		col2 -= v.y * 2 * plr->speed;
-	}
-
-	if (p->map[(int)row][(int)col] != '1' && p->map[(int)row2][(int)col2] != '1' && p->map[(int)plr->y][(int)col2] != '1' && p->map[(int)row2][(int)plr->x] != '1')
-	{
-		plr->y = row;
-		plr->x = col;
-	}
-	else if (p->map[(int)row][(int)plr->x] != '1' && p->map[(int)row2][(int)plr->x] != '1')
-		plr->y = row;
-	else if (p->map[(int)plr->y][(int)col] != '1' && p->map[(int)plr->y][(int)col2] != '1')
-		plr->x = col;
+		sideways_mov(&vs[plr->ind_v], -plr->speed, &row, &col);
+	check_and_change(map, plr, row, col);
 }
 
-void	rotate_view(t_param *p, t_player *plr, t_button *btn, t_data *img) //del img
+/*
+**	@brief	rotates player's view
+**	
+**	@param	p		the structure with parametrs
+**	@param	plr		the player structure
+**	@param	btn		the buttons structure
+*/
+void	rotate_view(t_param *p, t_player *plr, t_button *btn)
 {	
 	if (btn->q && !btn->e)
 		plr->ind_v -= plr->rotate_speed;
-		// rotate_by_ange(&plr->vx, &plr->vy, -p->sin_a, p->cos_a);
-
 	if (btn->e && !btn->q)
 		plr->ind_v += plr->rotate_speed;
-		// rotate_by_ange(&plr->vx, &plr->vy, p->sin_a, p->cos_a);
-		(void)img;
 	if (plr->ind_v >= p->cnt_v)
 		plr->ind_v -= p->cnt_v;
 	else if (plr->ind_v < 0)
 		plr->ind_v += p->cnt_v;
-	// plr->vx = img->v[plr->ind_v].x;
-	// plr->vy = img->v[plr->ind_v].y;
 }
 
-void	rotate_by_ange(double *x, double *y, double sin_a, double cos_a)
+/*
+**	@brief	movings player  forward or backward
+**	
+**	@param	v		player sight vector
+**	@param	speed	player speed
+**	@param	row		new player y position
+**	@param	col		new player x position
+*/
+void	forward_mov(t_vector *v, float speed, float *row, float *col)
 {
-	double	copy_x;
+	*row += v->y * speed;
+	*col += v->x * speed;
+}
 
-	copy_x = *x;
-	*x = copy_x * cos_a - *y * sin_a;
-	*y = copy_x * sin_a + *y * cos_a;
+/*
+**	@brief	movings player  left or right
+**	
+**	@param	v		player sight vector
+**	@param	speed	player speed
+**	@param	row		new player y position
+**	@param	col		new player x position
+*/
+void	sideways_mov(t_vector *v, float speed, float *row, float *col)
+{
+	*row -= v->x * speed;
+	*col += v->y * speed;
+}
+
+/*
+**	@brief	checks and moovings player to new position if its correct
+**	
+**	@param	map		pointer to map
+**	@param	plr		the player structure
+**	@param	row		new player y position
+**	@param	col		new player x position
+*/
+void	check_and_change(char **map, t_player *plr, float row, float col)
+{
+	int	row2;
+	int	col2;
+
+	row2 = (int)(plr->y + 2 * (row - plr->y));
+	col2 = (int)(plr->x + 2 * (col - plr->x));
+	if (map[(int)row][(int)col] != '1' && map[row2][col2] != '1'
+		&& map[(int)plr->y][col2] != '1' && map[row2][(int)plr->x] != '1')
+	{
+		plr->y = row;
+		plr->x = col;
+	}
+	else if (map[(int)row][(int)plr->x] != '1'
+			&& map[row2][(int)plr->x] != '1')
+		plr->y = row;
+	else if (map[(int)plr->y][(int)col] != '1'
+			&& map[(int)plr->y][col2] != '1')
+		plr->x = col;
 }

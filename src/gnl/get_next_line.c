@@ -7,6 +7,8 @@ int	get_next_line(int fd, char **line)
 
 	i = 0;
 	*line = malloc(4 * 1024 * 1024);
+	if (!line)
+		return (-1);
 	while ((result = read(fd, *line + i, CONTENT_MIN_SIZE)))
 	{
 		if (result == -1)
