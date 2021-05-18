@@ -13,7 +13,7 @@
 # include "mlx.h"
 # include "get_next_line.h"
 
-# define DEBUG 1
+# define DEBUG 0
 
 # define KEY_W 13
 # define KEY_S 1
@@ -164,6 +164,7 @@ void	ft_raise_error(char *s);
 int		ft_abs(int a);
 int		ft_min(int a, int b);
 int		ft_max(int a, int b);
+float	ft_dist(float a, float b);
 void	rotate_by_ange(double *x, double *y, double sin_a, double cos_a);
 
 // parcer_utils.c
@@ -188,6 +189,7 @@ void	get_texture(char *s, t_param *p);
 void	check_line_map(char *s, t_param *p);
 void	create_map(t_param *p);
 void	check_field(t_param *p);
+int		check_cell_parcer(char **map, int i, int j);
 
 // window.c
 void	create_window(t_data *img, t_param *p, t_button *btn);
@@ -200,7 +202,6 @@ void	draw_floor_and_cel(t_param *p, t_data *img);
 void	draw_walls(t_param *p, t_data *img);
 void	put_column(t_data *img, t_sprite *spr, int col, int i);
 void	put_pixel_column(t_data *img, int col, int up, int down, int color);
-// void	put_column2(t_param *p, t_data *img, t_sprite *spr, int col, float k);
 
 // rays.c
 int		check_cell(t_data *img, t_vector vray, t_dot *dot);
@@ -209,18 +210,11 @@ void	throw_ray(t_data *img, t_vector vray);
 float	ft_dist(float a, float b);
 
 // get_img_helpers.c
+int		create_trgb(int t, int r, int g, int b);
 void	my_mlx_pixel_put(t_data *img, int row, int col, int color);
 void	my_mlx_row_put(t_data *img, int row, int color);
 int		get_pixel(t_texture *xpm, int row_sp, float diff);
-void	draw_mmap(t_param *p, t_data	*img);
-int		create_trgb(int t, int r, int g, int b);
-int		both_equal_sign(float x, float y);
 void	pe4em_vectora(t_data *img, t_param *p);
-
-
-// minimap_bonus
-void	draw_player(t_param *p, t_data *img);
-void	draw_ray_of_sight(t_param *p, t_data *img);
 
 // hooks.c
 int		press_button(int keycode, t_data *img);
@@ -230,7 +224,7 @@ int		release_button(int keycode, t_data *img);
 void	run_game(t_data *img);
 int		main_game(t_data *img);
 
-// player.c
+// inicialize_struct.c
 void	inicialise_buttons(t_button *btn);
 void	initialise_player(t_data *img, t_param *p, t_player *plr);
 
@@ -241,5 +235,9 @@ void	forward_mov(t_vector *v, float speed, float *row, float *col);
 void	sideways_mov(t_vector *v, float speed, float *row, float *col);
 void	check_and_change(char **map, t_player *plr, float row, float col);
 
+// minimap_bonus
+void	draw_player(t_param *p, t_data *img);
+void	draw_mmap(t_param *p, t_data	*img);
+void	draw_ray_of_sight(t_param *p, t_data *img);
 
 #endif

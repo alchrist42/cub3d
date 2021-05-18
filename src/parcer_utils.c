@@ -6,16 +6,15 @@
  * @param arr	pointer to array
  * @return int	count strings in array
  */
-int		ft_arrlen(char **arr)
+int	ft_arrlen(char **arr)
 {
 	int	i;
 
 	i = 0;
-	while(arr[i])
+	while (arr[i])
 		i++;
 	return (i);
 }
-
 
 /*
 **	@brief	tests strings consist only digits
@@ -23,9 +22,9 @@ int		ft_arrlen(char **arr)
 **	@param	s	pointer to string
 **	@return	int	0 if test fail, else 1
 */
-int		only_digits(char *s)
+int	only_digits(char *s)
 {
-	while(*s)
+	while (*s)
 		if (!ft_isdigit(*s++))
 			return (0);
 	return (1);
@@ -41,7 +40,7 @@ void	ft_free_split(char **arr)
 	int	i;
 
 	i = 0;
-	while(arr[i])
+	while (arr[i])
 		free(arr[i++]);
 	free(arr);
 }

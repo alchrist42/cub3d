@@ -8,7 +8,7 @@
 */
 void	get_resolution(char *s, t_param *p)
 {
-	char **arr;
+	char	**arr;
 
 	if (p->res_x)
 		ft_raise_error("Dublicate resolution string\n");
@@ -64,8 +64,8 @@ void	get_colors(char *s, bool is_floor, t_param *p)
 
 	arr = ft_split_set(s, ", ");
 	if (ft_arrlen(arr) != 3 || !only_digits(arr[0]) || !only_digits(arr[1])
-			|| !only_digits(arr[2]) || ft_strlen(arr[0]) > 3
-			|| ft_strlen(arr[1]) > 3 || ft_strlen(arr[2]) > 3)
+		|| !only_digits(arr[2]) || ft_strlen(arr[0]) > 3
+		|| ft_strlen(arr[1]) > 3 || ft_strlen(arr[2]) > 3)
 		ft_raise_error("Incorrect parameters in color\n");
 	i = -1;
 	while (++i < 3)
@@ -86,10 +86,8 @@ void	get_colors(char *s, bool is_floor, t_param *p)
 */
 void	get_texture(char *s, t_param *p)
 {
-	
-	// 	ft_raise_error("Missing texture file\n");
 	if (!ft_strncmp(s, "NO ", 3))
-		p->t_no = ft_strdup(s + 3); //todo del strdup
+		p->t_no = ft_strdup(s + 3);
 	else if (!ft_strncmp(s, "SO ", 3))
 		p->t_so = ft_strdup(s + 3);
 	else if (!ft_strncmp(s, "WE ", 3))
@@ -100,7 +98,4 @@ void	get_texture(char *s, t_param *p)
 		p->t_sp = ft_strdup(s + 2);
 	else
 		ft_raise_error("Impossible error!\n");
-	s[2] = 0;
-	if (DEBUG)
-		printf("get TEXTURE  for %s from %s\n", s, s + 3);
 }

@@ -25,7 +25,7 @@ HEADER		=	include/cub3d.h
 SRCS		= 	$(addprefix $(SRCS_FOLDER),$(SRCS_FILES))
 OBJS		=	$(patsubst %.c,%.o,$(SRCS))
 
-INCLUDE		=	-I./include -I./src/libft/ -I./src/gnl/ -I./src/mlx/
+INCLUDE		=	-I./include -I./src/libft/ -I./src/gnl/ -I./src/mlx_mms/
 
 CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror
@@ -34,7 +34,7 @@ RM			=	rm -f
 
 LIBC		=	ar rcs
 
-MLX = ./src/mlx/libmlx.a
+MLX = ./src/mlx_mms/libmlx.dylib
 LIB = ./src/libft/libft.a
 
 all:		$(NAME)
@@ -45,8 +45,9 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS) $(HEADER)
 			$(MAKE) -C $(dir $(MLX))
+			@mv $(MLX) $(notdir $(MLX))
 			$(MAKE) -C $(dir $(LIB))
-			$(CC) $(FRAMEWORK) $(INCLUDE) $(MLX) $(LIB) -O3 -o $(NAME) $(OBJS)
+			$(CC) $(FRAMEWORK) $(INCLUDE) $(notdir $(MLX)) $(LIB) -O3 -o $(NAME) $(OBJS)
 
 bonus:		$(NAME)
 
@@ -60,6 +61,7 @@ clean:
 fclean:		clean
 			@make -C $(dir $(LIB)) fclean
 			$(RM) $(MLX)
+			$(RM) $(notdir $(MLX))
 			$(RM) $(NAME)
 
 re:			fclean all
