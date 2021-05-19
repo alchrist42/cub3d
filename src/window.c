@@ -1,9 +1,14 @@
 #include "cub3d.h"
 
+/*
+**	@brief	Create a window and img objects and load textures
+**	
+**	@param	img		the mlx instance
+**	@param	p		the structure with parameters
+**	@param	btn		the structure with buttons
+*/
 void	create_window(t_data *img, t_param *p, t_button *btn)
 {
-
-	
 	img->mlx = mlx_init();
 	if (!img->mlx)
 		ft_raise_error("Cannot initialize mlx\n");
@@ -20,7 +25,6 @@ void	create_window(t_data *img, t_param *p, t_button *btn)
 	img->btn = btn;
 }
 
-
 /*
 **	@brief	closes window and stop program
 **	
@@ -33,7 +37,6 @@ int	close_win(t_data *img)
 	exit (0);
 }
 
-
 /*
 **	@brief changes resolution if it's bigger than the display resolution 
 **	
@@ -45,25 +48,22 @@ void	correct_resolution(t_param *p)
 {
 	int	x;
 	int	y;
-	
+
 	mlx_get_screen_size(&x, &y);
 	p->res_x = ft_min(x, p->res_x);
 	p->res_y = ft_min(y, p->res_y);
-// 	// p->sin_a = sin(M_PI / 60);
-// 	// p->cos_a = cos(M_PI / 60);
-// 	// p->angle_x = M_PI / 3;
-// 	// p->angle_y = p->angle_x * p->res_y / p->res_x;
-// 	// p->angle_step = p->angle_x / p->res_x;
-
-// 	// p->start_sin = sin(p->angle_x / 2);
-// 	// p->start_cos = cos(p->angle_x / 2);
-// 	// p->sin_step = sin(p->angle_step);
-// 	// p->cos_step = cos(p->angle_step);
 }
 
+/*
+**	@brief	Get the textures object
+**	
+**	@param	img		the mlx instance
+**	@param	xpm		array for textures
+**	@param	p		the structure with parameters
+*/
 void	get_textures(t_data *img, t_texture *xpm, t_param *p)
 {
-	int i;
+	int	i;
 
 	xpm[0].img = mlx_xpm_file_to_image(img->mlx, p->t_we, &xpm[0].w, &xpm[0].h);
 	xpm[1].img = mlx_xpm_file_to_image(img->mlx, p->t_ea, &xpm[1].w, &xpm[1].h);
@@ -74,6 +74,6 @@ void	get_textures(t_data *img, t_texture *xpm, t_param *p)
 		ft_raise_error("Cannot read texture file\n");
 	i = -1;
 	while (++i < 5)
-		xpm[i].addr = mlx_get_data_addr(xpm[i].img, &xpm[i].bpp, &xpm[i].llen, &xpm[i].end);
-	
+		xpm[i].addr = mlx_get_data_addr(xpm[i].img, &xpm[i].bpp,
+				&xpm[i].llen, &xpm[i].end);
 }

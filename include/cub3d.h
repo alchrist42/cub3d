@@ -139,7 +139,6 @@ typedef struct	s_data {
 	int			llen;
 	int			end;
 
-	t_dot		dot[3];
 	t_texture	xpm[5];
 	t_param 	*p;
 	t_player	*plr;
@@ -154,7 +153,13 @@ typedef struct s_dot
 	float	x;
 	float	y;
 	float	z;
-}	t_dot;	
+}	t_dot;
+
+typedef struct s_cell
+{
+	char	x;
+	char	y;
+}	t_cell;
 
 
 // raise_error.c
@@ -205,9 +210,9 @@ void	put_pixel_column(t_data *img, int col, int up, int down, int color);
 
 // rays.c
 int		check_cell(t_data *img, t_vector vray, t_dot *dot);
-void	get_first_cross(t_data *img, t_vector *vray, t_dot *dot, t_dot *d1, t_dot *d2);
+void	sprite_cell(t_data *img, t_vector *vray, t_dot *dot, t_cell *cell);
 void	throw_ray(t_data *img, t_vector vray);
-float	ft_dist(float a, float b);
+void	get_next_cross(t_vector *vray, t_dot *dot, t_dot *d, int is_row);
 
 // get_img_helpers.c
 int		create_trgb(int t, int r, int g, int b);
