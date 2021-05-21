@@ -29,7 +29,7 @@
 
 # define TRNS 0x980088
 
-typedef struct	s_vector
+typedef struct s_vector
 {
 	double	x;
 	double	y;
@@ -50,34 +50,30 @@ typedef struct s_texture
 	int		end;
 }	t_texture;
 
-typedef	struct s_sprite
+typedef struct s_sprite
 {
 	t_texture	*xpm;
 	float		h;
 	float		diff;
 }	t_sprite;
 
-typedef struct	s_player
+typedef struct s_player
 {
-	float	x;
-	float	y;
-	float	z;
-	float	dot_x; //del
-	float	dot_y;
-	float	dot_z;
+	float		x;
+	float		y;
+	float		z;
+	double		vx;
+	double		vy;
+	double		vz;
 
-	float	diff;
-	int		texture_ind;
-
-	t_sprite 	sprite[200];
+	float		diff;
+	int			texture_ind;
+	t_sprite	sprite[200];
 	int			cnt_s;
 
-	double	vx;
-	double	vy;
-	double	vz;
-	int		ind_v;
-	int		rotate_speed;
-	float	speed;
+	int			ind_v;
+	int			rotate_speed;
+	float		speed;
 }	t_player;
 
 typedef struct s_button
@@ -90,16 +86,11 @@ typedef struct s_button
 	bool	e;
 }	t_button;
 
-
 typedef struct s_param
 {
 	int		res_x;
 	int		res_y;
-	char	*t_no;
-	char	*t_so;
-	char	*t_we;
-	char	*t_ea;
-	char	*t_sp;
+	char	*xpm[5];
 	int		floor;
 	int		cel;
 	bool	got_param;
@@ -115,7 +106,7 @@ typedef struct s_param
 	bool	save;
 
 	int		cnt_v;
-	
+
 	double	sin_a;
 	double	cos_a;
 
@@ -128,9 +119,7 @@ typedef struct s_param
 	double	cos_step;
 }	t_param;
 
-
-
-typedef struct	s_data {
+typedef struct s_data {
 	void		*mlx;
 	void		*win;
 	void		*img;
@@ -140,13 +129,11 @@ typedef struct	s_data {
 	int			end;
 
 	t_texture	xpm[5];
-	t_param 	*p;
+	t_param		*p;
 	t_player	*plr;
 	t_button	*btn;
 	t_vector	*v;
 }				t_data;
-
-
 
 typedef struct s_dot
 {
@@ -160,7 +147,6 @@ typedef struct s_cell
 	char	x;
 	char	y;
 }	t_cell;
-
 
 // raise_error.c
 void	ft_raise_error(char *s);
@@ -206,13 +192,18 @@ void	get_textures(t_data *img, t_texture *xpm, t_param *p);
 void	draw_floor_and_cel(t_param *p, t_data *img);
 void	draw_walls(t_param *p, t_data *img);
 void	put_column(t_data *img, t_sprite *spr, int col, int i);
-void	put_pixel_column(t_data *img, int col, int up, int down, int color);
 
 // rays.c
-int		check_cell(t_data *img, t_vector vray, t_dot *dot);
-void	sprite_cell(t_data *img, t_vector *vray, t_dot *dot, t_cell *cell);
 void	throw_ray(t_data *img, t_vector vray);
+void	inicialise_first_dots(t_data *img, t_vector *vray, t_dot *dot_row,
+			t_dot *dot_col);
 void	get_next_cross(t_vector *vray, t_dot *dot, t_dot *d, int is_row);
+
+// rayc_check.c
+int		check_cell_x(t_data *img, t_vector *vray, t_dot *dot, int *i);
+int		check_cell_y(t_data *img, t_vector *vray, t_dot *dot, int *i);
+void	check_sprite_x(t_data *img, t_vector *vray, t_dot *dot, char cell);
+void	check_sprite_y(t_data *img, t_vector *vray, t_dot *dot, char cell);
 
 // get_img_helpers.c
 int		create_trgb(int t, int r, int g, int b);
@@ -239,6 +230,13 @@ void	rotate_view(t_param *p, t_player *plr, t_button *btn);
 void	forward_mov(t_vector *v, float speed, float *row, float *col);
 void	sideways_mov(t_vector *v, float speed, float *row, float *col);
 void	check_and_change(char **map, t_player *plr, float row, float col);
+
+// save.c
+void	ft_put_int(unsigned char *ch, int x);
+void	ft_bmp_header(t_data *img, int fd, int size);
+void	ft_bmp_put_pixels(t_data *img, int fd);
+void	ft_save_bmp(t_data *img);
+int		get_pixel_img(t_data *img, int row, int col);
 
 // minimap_bonus
 void	draw_player(t_param *p, t_data *img);

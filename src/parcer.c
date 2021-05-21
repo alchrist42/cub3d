@@ -66,6 +66,8 @@ int	parsing_args(int argc, char **argv, t_param *p)
 */
 void	inicialise_params(t_param *p)
 {
+	int	i;
+
 	p->cel = -1;
 	p->floor = -1;
 	p->res_x = 0;
@@ -76,6 +78,9 @@ void	inicialise_params(t_param *p)
 	p->w_map = 0;
 	p->plr_x = 0;
 	p->plr_y = 0;
+	i = -1;
+	while (++i < 5)
+		p->xpm[i] = NULL;
 }
 
 /*
@@ -119,6 +124,8 @@ void	parsing_params(int fd, t_param *p)
 */
 void	parsing_line(char *s, t_param *p)
 {
+	while (*s == ' ' || *s == '\t')
+		s++;
 	if (!ft_strncmp(s, "R ", 2))
 		get_resolution(s + 2, p);
 	else if (!ft_strncmp(s, "F ", 2) || !ft_strncmp(s, "C ", 2))
@@ -129,6 +136,6 @@ void	parsing_line(char *s, t_param *p)
 		get_texture(s, p);
 	else
 		ft_raise_error(ft_strjoin("Cannot parse string: ", s));
-	p->got_param = (p->cel >= 0 && p->floor >= 0 && p->res_x && p->t_so
-			&& p->t_we && p->t_no && p->t_ea && p->t_sp);
+	p->got_param = (p->cel >= 0 && p->floor >= 0 && p->res_x && p->xpm[0]
+			&& p->xpm[1] && p->xpm[2] && p->xpm[3] && p->xpm[4]);
 }	

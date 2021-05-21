@@ -16,5 +16,7 @@ int	main_game(t_data *img)
 	draw_floor_and_cel(img->p, img);
 	draw_walls(img->p, img);
 	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
+	if (img->p->save)
+		ft_save_bmp(img);
 	return (0);
 }

@@ -10,13 +10,14 @@ SRCS_FILES	= 	main.c \
 				game.c \
 				hooks.c \
 				rays.c \
+				rays_checks.c \
 				get_img.c \
 				get_img_helpers.c \
 				inicialise_structs.c \
 				mooving.c \
+				save.c \
 				utils.c \
 				gnl/get_next_line.c \
-				# gnl/get_next_line_utils.c \
 
 SRCS_FOLDER	=	src/
 HEADER		=	include/cub3d.h
@@ -40,17 +41,15 @@ LIB = ./src/libft/libft.a
 all:		$(NAME)
 
 %.o:		%.c
-			$(CC) $(CFLAGS) $(INCLUDE) -g -c $< -o $@	
-			#todo del -g
+			$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@	
+
 
 $(NAME):	$(OBJS) $(HEADER)
 			$(MAKE) -C $(dir $(MLX))
 			$(MAKE) -C $(dir $(LIB))
-			$(CC) $(FRAMEWORK) $(INCLUDE) $(MLX) $(LIB) -O3 -o $(NAME) $(OBJS)
+			$(CC) $(INCLUDE) $(FRAMEWORK) $(MLX) $(LIB) -o $(NAME) $(OBJS)
 
 bonus:		$(NAME)
-
-libft.a:   
 
 clean:
 			$(RM) $(OBJS)
