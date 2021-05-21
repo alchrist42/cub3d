@@ -104,19 +104,7 @@ typedef struct s_param
 	int		plr_x;
 	int		plr_y;
 	bool	save;
-
 	int		cnt_v;
-
-	double	sin_a;
-	double	cos_a;
-
-	double	angle_x;
-	double	angle_y;
-	double	start_cos;
-	double	start_sin;
-	double	angle_step;
-	double	sin_step;
-	double	cos_step;
 }	t_param;
 
 typedef struct s_data {

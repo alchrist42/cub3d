@@ -62,6 +62,8 @@ void	create_map(t_param *p)
 		i++;
 	}
 	ft_lstclear(&p->lst_map, free);
+	if (!p->plr_x)
+		ft_raise_error("No player position on the map\n");
 }
 
 /*

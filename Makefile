@@ -41,7 +41,7 @@ LIB = ./src/libft/libft.a
 all:		$(NAME)
 
 %.o:		%.c
-			$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@	
+			$(CC) $(CFLAGS) $(INCLUDE) -c -g $< -o $@	
 
 
 $(NAME):	$(OBJS) $(HEADER)
