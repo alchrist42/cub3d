@@ -173,7 +173,7 @@ int		check_cell_parcer(char **map, int i, int j);
 // window.c
 void	create_window(t_data *img, t_param *p, t_button *btn);
 int		close_win(t_data *img);
-void	correct_resolution(t_param *p);
+void	correct_resolution(t_data *img, t_param *p);
 void	get_textures(t_data *img, t_texture *xpm, t_param *p);
 
 // get_img.c
@@ -207,6 +207,7 @@ int		release_button(int keycode, t_data *img);
 // game.c
 void	run_game(t_data *img);
 int		main_game(t_data *img);
+void	save_mode(t_data *img, t_param *p, t_player *plr);
 
 // inicialize_struct.c
 void	inicialise_buttons(t_button *btn);
