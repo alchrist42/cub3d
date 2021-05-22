@@ -27,6 +27,9 @@
 # define KEY_E 14
 # define KEY_ESC 53
 
+# define PLR_SPEED 0.16
+# define PLR_ROTATE_SPEED 2
+
 # define TRNS 0x980088
 
 typedef struct s_vector
@@ -173,7 +176,7 @@ int		check_cell_parcer(char **map, int i, int j);
 // window.c
 void	create_window(t_data *img, t_param *p, t_button *btn);
 int		close_win(t_data *img);
-void	correct_resolution(t_data *img, t_param *p);
+void	correct_resolution(t_param *p);
 void	get_textures(t_data *img, t_texture *xpm, t_param *p);
 
 // get_img.c

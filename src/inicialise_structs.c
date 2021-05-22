@@ -28,8 +28,8 @@ void	initialise_player(t_data *img, t_param *p, t_player *plr)
 	plr->x = p->plr_x + 0.5;
 	plr->y = p->plr_y + 0.5;
 	plr->z = 0;
-	plr->rotate_speed = p->cnt_v / 120;
-	plr->speed = 0.08;
+	plr->rotate_speed = p->cnt_v * PLR_ROTATE_SPEED / 180;
+	plr->speed = PLR_SPEED;
 	if (p->map[p->plr_y][p->plr_x] == 'E')
 		plr->ind_v = 0;
 	else if (p->map[p->plr_y][p->plr_x] == 'S')

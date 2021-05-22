@@ -15,7 +15,7 @@ void	create_window(t_data *img, t_param *p, t_button *btn)
 	if (!img->mlx)
 		ft_raise_error("Cannot initialize mlx\n");
 	get_textures(img, img->xpm, p);
-	correct_resolution(img, p);
+	correct_resolution(p);
 	img->win = mlx_new_window(img->mlx, p->res_x, p->res_y, "Cub3D");
 	if (!img->win)
 		ft_raise_error("Cannot create game windows\n");
@@ -44,14 +44,14 @@ int	close_win(t_data *img)
 **	@param	p		pointer to structure of parameters
 **	@return	int		has no return value
 */
-void	correct_resolution(t_data *img, t_param *p)
+void	correct_resolution(t_param *p)
 {
 	int	x;
 	int	y;
 
 	if (!p->save)
 	{
-		mlx_get_screen_size(img->mlx, &x, &y);
+		mlx_get_screen_size(&x, &y);
 		p->res_x = ft_min(x, p->res_x);
 		p->res_y = ft_min(y, p->res_y);
 	}
