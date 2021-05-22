@@ -4,8 +4,8 @@ SO ./textures/SO.xpm
 WE ./textures/WE.xpm
 EA ./textures/EA.xpm
 S ./textures/skeleton1.xpm
-F  100,20,20 
-C  170,220,255
+F  5,5,5 
+C  22,15,15
         1111111111111111111111111
         1000000000110000000000021
         1011000001110000000000021
