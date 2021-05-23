@@ -1,0 +1,24 @@
+R 1366 768
+NO ./textures/NO.xpm
+SO ./textures/SO.xpm
+WE ./textures/WE.xpm
+EA ./textures/EA.xpm
+S ./textures/table1.xpm
+F 220,100,0
+C 225,30,0
+111
+101
+101
+101
+101
+101
+101
+101
+101
+101
+101
+101
+101
+101
+1N1
+111

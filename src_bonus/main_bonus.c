@@ -14,5 +14,6 @@ int	main(int argc, char **argv)
 	create_window(&img, &p, &btn);
 	pe4em_vectora(&img, &p);
 	initialise_player(&img, &p, &plr);
+	initialise_bonuses(&img);
 	run_game(&img);
 }

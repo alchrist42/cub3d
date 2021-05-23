@@ -1,22 +1,37 @@
 R 1366 768
-NO ./textures/wall1h.xpm
-SO ./textures/wall1v.xpm
-WE ./textures/wall2h.xpm
+NO ./textures/wall2v.xpm
+SO ./textures/wall2h.xpm
+WE ./textures/wall2v.xpm
 EA ./textures/wall2v.xpm
-S ./textures/skeleton1.xpm
+S ./textures2/torch_i.xpm
 F  5,5,5 
-C  22,15,15
-        1111111111111111111111111
-        1000000000110000000000021
-        1011000001110000000000021
-        1001000000000000000000021
-111111111011000001110000000000021
-100000000011000001110111010111111
-11110111111111011100000012021
-11110111111111011101010010001
-11000000110101011100000010001
-10002000000000001100000010001
-10000000000000001101010010001
-11000001110101011111011110N011
-11110111 1110101 101111012021
-11111111 1111111 111111111111
+C  22,O5,O5
+
+OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+O...O....O..........O.......W......OOOOOOO....OOO.....O...OO
+O...O..OOOOOOO.OOOOOO......O.......O..................O...OO
+O...O...............O......O.......OOOO.OOOOO.O.OOOOOOO...OO
+O.OOO..........OOO.........OOOOO.OO.....O.....O.....OOO...OO
+O......OOOOOO.OOOOOOO......O......O..O..O.....O.....OOO.OOOO
+OOOOOO......O.O........OOOOOOOO...O..O..OO.OOOO.....OOO...OO
+O2...O......O.O...OOOO...O....O...O..O..O..O..O.....OOOO..OO
+O2.....OOO..O.O.....O.......O.....OOOO.....O..O...........OO
+O2...O.OOO..O.OO.OO.OOOOOOOOOOOOO.OOOO.....O..O.OOOOOOOOOOOO
+OOOOOO.O......O...........O..............O......O...O......O
+O......OOOOOOOO....OOOOO..O...O.OO.......O......O......OO..O
+O..OO.......OOO....O..........O.OOOO.....OOOOOOOO......OO..O
+O...O................O........O.OOO.....O.........OOOO.OO..O
+O..OOOOOOOOOOOOOOOOOOO........O.OO........OOOOOOO.O.....O..O
+O..OOOOO............OO...2....O.O...OO..OOOOOOOOOOOOO..OO..O
+O.........O.......O...............OO..OOOOOO...............O
+OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO.......O..............O
+O.....................................OO.OO..O.O...........O
+O.OOOOO..OOOO..OOOO..OOOO...OOO...O..OOOOOOO...............O
+O...O....O.....O..O..O..O..O...O..O..OOOOOOO...............O
+O...O....OOO...OOOO..OOOO..OOOOO..O...OOOOO................O
+O...O....O.....O.O...O.O...O...O..O....OOO.................O
+O...O....OOOO..O..O..O..O..O...O..OO....O....OOOOOO.OOOOO..O
+O...................................O.......OO.O...........O
+O.................................O.OOOO2OOOO....OOOOOOOOO.O
+O.................................O...........2O...........O
+OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO

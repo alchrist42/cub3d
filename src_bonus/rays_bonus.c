@@ -18,6 +18,7 @@ void	throw_ray(t_data *img, t_vector vray)
 	max_cross = 256;
 	while (--max_cross && img->plr->cnt_s < 200)
 	{
+		draw_ray_mmap(img, &dot);
 		if (ft_dist(dot_row.x - img->plr->x, dot_row.y - img->plr->y)
 			< ft_dist(dot_col.x - img->plr->x, dot_col.y - img->plr->y))
 		{

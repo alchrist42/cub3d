@@ -47,3 +47,12 @@ void	initialise_player(t_data *img, t_param *p, t_player *plr)
 		printf("Start pos x=%f, y=%f, rotate_speed=%d\n ind=%d\n",
 			plr->vx, plr->vy, plr->rotate_speed, plr->ind_v);
 }
+
+void	initialise_bonuses(t_data *img)
+{
+	create_mini_map(img, img->p);
+	img->plr->i_mmap = 1;
+	img->plr->i_torch = 0;
+}
+
+

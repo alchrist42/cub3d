@@ -31,7 +31,9 @@
 # define PLR_SPEED 0.16
 # define PLR_ROTATE_SPEED 2
 
-# define TRNS 0x980088
+# define TRNS 0x00980088
+# define CLR_PLR 0x00772222
+# define CLR_RAY 0x00555555
 
 typedef struct s_vector
 {
@@ -83,6 +85,8 @@ typedef struct s_player
 
 	float		shadow_gl;
 	float		shadow_dst;
+	int			i_mmap;
+	int			i_torch;
 }	t_player;
 
 typedef struct s_button
@@ -111,10 +115,17 @@ typedef struct s_param
 	t_list	*lst_map;
 	char	**map;
 
+	int		mmap_x;
+	int		mmap_y;
+	int		mmap_len;
+	int		mmap_dst;
+	char	*mmap;
+
 	int		plr_x;
 	int		plr_y;
 	bool	save;
 	int		cnt_v;
+
 }	t_param;
 
 typedef struct s_data {
@@ -224,6 +235,7 @@ void	save_mode(t_data *img, t_param *p, t_player *plr);
 // inicialize_struct.c
 void	inicialise_buttons(t_button *btn);
 void	initialise_player(t_data *img, t_param *p, t_player *plr);
+void	initialise_bonuses(t_data *img);
 
 // move.c
 void	change_pos(char **map, t_player *plr, t_button *btn, t_vector *vs);
@@ -244,11 +256,12 @@ void	ft_save_bmp(t_data *img);
 int		get_pixel_img(t_data *img, int row, int col);
 
 // minimap
+void	create_mini_map(t_data *img, t_param *p);
+void	draw_mmap(t_param *p, t_data *img);
 void	draw_player(t_param *p, t_data *img);
-void	draw_ray_of_sight(t_param *p, t_data *img);
+void	draw_ray_mmap(t_data *img, t_dot *dot);
 
 // hud
-void	draw_mmap(t_param *p, t_data *img);
 void	draw_hp_bar(t_param *p, t_data	*img);
 
 #endif
