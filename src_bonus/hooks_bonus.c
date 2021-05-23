@@ -45,9 +45,11 @@ int	release_button(int keycode, t_data *img)
 	return (0);
 }
 
-int	mouse_press(int btn, int x, int y, t_data *img)
+int	mouse_press(int mbtn, int x, int y, t_data *img)
 {
 	(void)img;
-	printf("mouse x=%d, y=%d, btn = %d\n", x, y, btn);
+	printf("mouse x=%d, y=%d, btn = %d\n", x, y, mbtn);
+	if (img->btn->ctrl && mbtn == 1 && x > 0 && x < img->p->res_x && y > 0 && y < img->p->res_y)
+		img->btn->ctrl = false;
 	return (0);
 }

@@ -27,8 +27,10 @@ int	main_game(t_data *img)
 	mouse_move(img, img->btn);
 	rotate_view(img->p, img->plr, img->btn);
 	change_pos(img->p->map, img->plr, img->btn, img->v);
+	
 	draw_floor_and_cel(img->p, img);
 	draw_walls(img->p, img);
+	draw_hp_bar(img->p, img);
 	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
 	mlx_do_sync(img->mlx);
 	return (0);

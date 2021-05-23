@@ -23,6 +23,7 @@ void	create_window(t_data *img, t_param *p, t_button *btn)
 	if (!img->img)
 		ft_raise_error("Cannot create new mlx_img\n");
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->llen, &img->end);
+	mlx_mouse_move(img->win, img->p->res_x / 2, img->p->res_y / 2);
 }
 
 /*

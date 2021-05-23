@@ -38,6 +38,8 @@ SRCS_B_FILES	=	main_bonus.c \
 					rotate_bonus.c \
 					save_bonus.c \
 					utils_bonus.c \
+					minimap_bonus.c \
+					hud_bonus.c \
 					gnl/get_next_line.c \
 
 SRCS_FOLDER	=	src/

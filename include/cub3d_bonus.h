@@ -77,6 +77,7 @@ typedef struct s_player
 	int			cnt_s;
 
 	int			ind_v;
+	int			hp;
 	int			rotate_speed;
 	float		speed;
 
@@ -230,7 +231,7 @@ void	forward_mov(t_vector *v, float speed, float *row, float *col);
 void	sideways_mov(t_vector *v, float speed, float *row, float *col);
 void	check_and_change(char **map, t_player *plr, float row, float col);
 
-//rotate
+// rotate
 void	rotate_view(t_param *p, t_player *plr, t_button *btn);
 void	mouse_move(t_data *img, t_button *btn);
 
@@ -242,9 +243,12 @@ void	ft_bmp_put_pixels(t_data *img, int fd);
 void	ft_save_bmp(t_data *img);
 int		get_pixel_img(t_data *img, int row, int col);
 
-// minimap_bonus
+// minimap
 void	draw_player(t_param *p, t_data *img);
-void	draw_mmap(t_param *p, t_data	*img);
 void	draw_ray_of_sight(t_param *p, t_data *img);
+
+// hud
+void	draw_mmap(t_param *p, t_data *img);
+void	draw_hp_bar(t_param *p, t_data	*img);
 
 #endif

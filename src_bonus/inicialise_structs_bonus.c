@@ -25,6 +25,7 @@ void	inicialise_buttons(t_button *btn)
 void	initialise_player(t_data *img, t_param *p, t_player *plr)
 {
 	img->plr = plr;
+	plr->hp = 90;
 	plr->x = p->plr_x + 0.5;
 	plr->y = p->plr_y + 0.5;
 	plr->z = 0;
