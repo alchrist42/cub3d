@@ -40,6 +40,7 @@ SRCS_B_FILES	=	main_bonus.c \
 					utils_bonus.c \
 					minimap_bonus.c \
 					hud_bonus.c \
+					player_bonus.c \
 					gnl/get_next_line.c \
 
 SRCS_FOLDER	=	src/

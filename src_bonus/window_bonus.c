@@ -68,27 +68,20 @@ void	correct_resolution(t_param *p)
 void	get_textures(t_data *img, t_texture *xpm, t_param *p)
 {
 	int	i;
-	int	j;
 
 	i = -1;
-	while (++i < 5)
+	while (++i < 9)
 	{
-		j = -1;
-		while (++j < i)
-		{
-			if (!ft_strncmp(p->xpm[i], p->xpm[j], ft_strlen(p->xpm[i]) + 1))
-			{
-				xpm[i] = xpm[j];
-				continue ;
-			}
-		}
+		if (!p->xpm[i])
+			continue ;
 		if (!ft_strncmp(p->xpm[i] + ft_strlen(p->xpm[i]) - 4, ".png", 4))
 			ft_raise_error("png textures not supported\n");
 		xpm[i].img = mlx_xpm_file_to_image(img->mlx, p->xpm[i],
 				&xpm[i].w, &xpm[i].h);
 		if (!xpm[i].img)
 			ft_raise_error("Cannot read texture file\n");
-		xpm[i].addr = mlx_get_data_addr(xpm[i].img, &xpm[i].bpp,
+		else
+			xpm[i].addr = mlx_get_data_addr(xpm[i].img, &xpm[i].bpp,
 				&xpm[i].llen, &xpm[i].end);
 	}
 }

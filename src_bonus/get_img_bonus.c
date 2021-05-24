@@ -76,24 +76,24 @@ void	put_column(t_data *img, t_sprite *spr, int col, int i)
 					+ (row_sp + 1) * spr[i].h / xpm->h);
 			if (down >= 0 && up < img->p->res_y
 				&& (i + 1 == img->plr->cnt_s
-					|| spr[i].h / 2 < img->p->res_y)
+					|| spr[i].h / 3 < img->p->res_y)
 				&& (color = get_pixel(xpm, row_sp, spr[i].diff)) != TRNS)
 				while (up < down)
-					my_mlx_pixel_put(img, up++, col, ft_shadow(img, color, spr[i].shad_k));
+					my_mlx_pixel_put(img, up++, col, ft_shadow(img, color, i));
 		}
 	}
 }
 
-// return (t << 24 | r << 16 | g << 8 | b);
-int	ft_shadow(t_data *img, int color, float k)
+int	ft_shadow(t_data *img, int color, int ind)
 {
 	unsigned char	r;
 	unsigned char	g;
 	unsigned char	b;
+	float			k;
 
 	r = color >> 16;
 	g = color >> 8;
 	b = color;
-	(void)img->plr->shadow_dst;
+	k = img->plr->sprite[ind].shad_k;
 	return (create_trgb(0, ft_min(r, 1.3 * r * k), ft_min(g * 0.8, g * k), ft_min(b * 0.8, b * k)));
 }

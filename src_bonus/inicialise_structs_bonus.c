@@ -41,8 +41,6 @@ void	initialise_player(t_data *img, t_param *p, t_player *plr)
 		plr->ind_v = p->cnt_v * 3 / 4;
 	plr->vx = img->v[plr->ind_v].x;
 	plr->vy = img->v[plr->ind_v].y;
-	plr->shadow_gl = 1;
-	plr->shadow_dst = 7;
 	if (DEBUG)
 		printf("Start pos x=%f, y=%f, rotate_speed=%d\n ind=%d\n",
 			plr->vx, plr->vy, plr->rotate_speed, plr->ind_v);

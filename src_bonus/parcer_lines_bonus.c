@@ -90,16 +90,11 @@ void	get_colors(char *s, bool is_floor, t_param *p)
 */
 void	get_texture(char *s, t_param *p)
 {
-	if (!ft_strncmp(s, "NO ", 3) && !p->xpm[2])
-		p->xpm[2] = ft_strdup(s + 3);
-	else if (!ft_strncmp(s, "SO ", 3) && !p->xpm[3])
-		p->xpm[3] = ft_strdup(s + 3);
-	else if (!ft_strncmp(s, "WE ", 3) && !p->xpm[0])
-		p->xpm[0] = ft_strdup(s + 3);
-	else if (!ft_strncmp(s, "EA ", 3) && !p->xpm[1])
-		p->xpm[1] = ft_strdup(s + 3);
-	else if (!ft_strncmp(s, "S ", 2) && !p->xpm[4])
-		p->xpm[4] = ft_strdup(s + 2);
-	else
+	if (p->xpm[s[1] - '1'])
+	{
+		if (DEBUG)
+			printf("texture[%d] s = '%s'\n", '1' - s[1], s);
 		ft_raise_error("Double texture in params\n");
+	}
+	p->xpm[s[1] - '1'] = ft_strdup(s + 3);
 }

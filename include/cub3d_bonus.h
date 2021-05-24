@@ -13,7 +13,7 @@
 # include "mlx.h"
 # include "get_next_line.h"
 
-# define DEBUG 0
+# define DEBUG 1
 
 # define KEY_W 13	
 # define KEY_S 1
@@ -30,10 +30,15 @@
 
 # define PLR_SPEED 0.16
 # define PLR_ROTATE_SPEED 2
+# define PLR_VIEW 0.3
 
 # define TRNS 0x00980088
 # define CLR_PLR 0x00772222
 # define CLR_RAY 0x00555555
+# define CLR_WALL 0x00404040
+# define CLR_DOOR 0x004F404F
+# define CLR_ITEM 0x00A0A020
+# define CLR_OBJS 0x006F406F
 
 typedef struct s_vector
 {
@@ -104,7 +109,7 @@ typedef struct s_param
 {
 	int		res_x;
 	int		res_y;
-	char	*xpm[5];
+	char	*xpm[9];
 	int		floor;
 	int		cel;
 	bool	got_param;
@@ -137,7 +142,7 @@ typedef struct s_data {
 	int			llen;
 	int			end;
 
-	t_texture	xpm[5];
+	t_texture	xpm[9];
 	t_param		*p;
 	t_player	*plr;
 	t_button	*btn;
@@ -201,7 +206,7 @@ void	get_textures(t_data *img, t_texture *xpm, t_param *p);
 void	draw_floor_and_cel(t_param *p, t_data *img);
 void	draw_walls(t_param *p, t_data *img);
 void	put_column(t_data *img, t_sprite *spr, int col, int i);
-int	ft_shadow(t_data *img, int color, float h);
+int		ft_shadow(t_data *img, int color, int ind);
 
 // rays.c
 void	throw_ray(t_data *img, t_vector vray);
@@ -258,10 +263,15 @@ int		get_pixel_img(t_data *img, int row, int col);
 // minimap
 void	create_mini_map(t_data *img, t_param *p);
 void	draw_mmap(t_param *p, t_data *img);
+void	draw_board_mmap(t_param *p, t_data *img);
 void	draw_player(t_param *p, t_data *img);
 void	draw_ray_mmap(t_data *img, t_dot *dot);
 
 // hud
 void	draw_hp_bar(t_param *p, t_data	*img);
+
+// player_bonus
+void	collision_item(t_data *img, t_player *plr);
+void	check_player(t_data *img, t_player *plr);
 
 #endif

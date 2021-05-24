@@ -69,16 +69,18 @@ void	check_and_change(char **map, t_player *plr, float row, float col)
 
 	row2 = (int)(plr->y + 2 * (row - plr->y));
 	col2 = (int)(plr->x + 2 * (col - plr->x));
-	if (map[(int)row][(int)col] != '1' && map[row2][col2] != '1'
-		&& map[(int)plr->y][col2] != '1' && map[row2][(int)plr->x] != '1')
+	if (!char_in_str(map[(int)row][(int)col], "12356")
+		&& !char_in_str(map[row2][col2], "12356")
+		&& !char_in_str(map[(int)plr->y][col2], "12356")
+		&& !char_in_str(map[row2][(int)plr->x], "12356"))
 	{
 		plr->y = row;
 		plr->x = col;
 	}
-	else if (map[(int)row][(int)plr->x] != '1'
-			&& map[row2][(int)plr->x] != '1')
+	else if (!char_in_str(map[(int)row][(int)plr->x], "12356")
+			&& !char_in_str(map[row2][(int)plr->x], "12356"))
 		plr->y = row;
-	else if (map[(int)plr->y][(int)col] != '1'
-			&& map[(int)plr->y][col2] != '1')
+	else if (!char_in_str(map[(int)plr->y][(int)col], "12356")
+			&& !char_in_str(map[(int)plr->y][col2], "12356"))
 		plr->x = col;
 }

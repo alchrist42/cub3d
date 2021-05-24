@@ -2,9 +2,9 @@
 
 void	draw_mmap(t_param *p, t_data *img)
 {
-	int row;
-	int	col;
-	char ch;
+	int		row;
+	int		col;
+	char	ch;
 
 	row = -1;
 	while (++row < p->mmap_y)
@@ -12,18 +12,38 @@ void	draw_mmap(t_param *p, t_data *img)
 		col = -1;
 		while (++col < p->mmap_x)
 		{
+			if (!p->mmap[p->mmap_x * row + col])
+				continue ;
 			ch = p->map[p->h_map * row / p->mmap_y][p->w_map * col / p->mmap_x];
-			if (ch == '1' && p->mmap[p->mmap_x * row + col])
-				my_mlx_pixel_put(img, row, col, 0x004F204F);
-			// else if (char_in_str(ch, "NEWS"))
-			// 	my_mlx_pixel_put(img, y, x, 0x0F009F00);
-			else if (char_in_str(ch, "2"))
-				my_mlx_pixel_put(img, row, col, 0x00008000);
-			// else
-			// 	my_mlx_pixel_put(img, row, col, 0x00000000);
+			if (char_in_str(ch, "123"))
+				my_mlx_pixel_put(img, row, col, CLR_WALL);
+			else if (char_in_str(ch, "56"))
+				my_mlx_pixel_put(img, row, col, CLR_OBJS);
+			else if (char_in_str(ch, "78"))
+				my_mlx_pixel_put(img, row, col, CLR_ITEM);
 		}
 	}
+	draw_board_mmap(p, img);
 	draw_player(p, img);
+}
+
+void	draw_board_mmap(t_param *p, t_data *img)
+{
+	int	row;
+	int	col;
+
+	row = 1;
+	col = 0;
+	while (++col < p->mmap_x - 1)
+		my_mlx_pixel_put(img, row, col, CLR_WALL);
+	while (++row < p->mmap_y - 1)
+	{
+		my_mlx_pixel_put(img, row, 1, CLR_WALL);
+		my_mlx_pixel_put(img, row, col - 1, CLR_WALL);
+	}
+	col = 0;
+	while (++col < p->mmap_x - 1)
+		my_mlx_pixel_put(img, row, col, CLR_WALL);
 }
 
 void	draw_player(t_param *p, t_data *img)

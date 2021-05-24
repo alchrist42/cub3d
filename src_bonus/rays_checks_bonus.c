@@ -25,7 +25,7 @@ int	check_cell_x(t_data *img, t_vector *vray, t_dot *dot, int *i)
 		img->plr->sprite[(*i)++].h = img->p->res_x
 			/ (ft_dist(dot->y - img->plr->y, dot->x - img->plr->x));
 	}
-	return (cell == '1');
+	return (cell > '0' && cell <= '4');
 }
 
 /*
@@ -81,7 +81,7 @@ int	check_cell_y(t_data *img, t_vector *vray, t_dot *dot, int *i)
 		img->plr->sprite[(*i)++].h = img->p->res_x
 			/ (ft_dist(dot->y - img->plr->y, dot->x - img->plr->x));
 	}
-	return (cell == '1');
+	return (cell > '0' && cell <= '4');
 }
 
 /*

@@ -82,7 +82,7 @@ void	check_field(t_param *p)
 		j = 0;
 		while (++j < p->w_map - 1)
 		{
-			if (char_in_str(p->map[i][j], "02NEWS")
+			if (char_in_str(p->map[i][j], "04789NEWS")
 				&& check_cell_parcer(p->map, i, j))
 			{
 				if (DEBUG)
