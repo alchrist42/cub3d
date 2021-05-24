@@ -16,9 +16,8 @@ int	press_button(int keycode, t_data *img)
 		img->btn->q = true;
 	else if (keycode == KEY_E || keycode == KEY_RIGHT)
 		img->btn->e = true;
-	else 
+	else
 		printf("%d\n", keycode);
-
 	if (keycode == KEY_CTRL)
 		img->btn->ctrl = true;
 	return (0);
@@ -49,7 +48,8 @@ int	mouse_press(int mbtn, int x, int y, t_data *img)
 {
 	(void)img;
 	printf("mouse x=%d, y=%d, btn = %d\n", x, y, mbtn);
-	if (img->btn->ctrl && mbtn == 1 && x > 0 && x < img->p->res_x && y > 0 && y < img->p->res_y)
+	if (img->btn->ctrl && mbtn == 1 && x > 0
+		&& x < img->p->res_x && y > 0 && y < img->p->res_y)
 		img->btn->ctrl = false;
 	return (0);
 }

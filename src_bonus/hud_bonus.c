@@ -4,7 +4,7 @@ void	draw_hp_bar(t_param *p, t_data	*img)
 {
 	int	row;
 	int	col;
-	int current_hp;
+	int	current_hp;
 
 	current_hp = p->res_x * img->plr->hp / 400;
 	col = p->res_x / 4 + 1;

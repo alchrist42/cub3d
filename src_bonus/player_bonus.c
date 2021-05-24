@@ -7,12 +7,10 @@ void	collision_item(t_data *img, t_player *plr)
 
 	col = (int)plr->x;
 	row = (int)plr->y;
-	
 	if (char_in_str(img->p->map[row][col], "7"))
 	{
 		plr->i_torch = 600;
 		img->p->map[row][col] = 0;
-
 	}
 	else if (char_in_str(img->p->map[row][col], "8"))
 	{

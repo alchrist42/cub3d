@@ -23,13 +23,12 @@ void	mouse_move(t_data *img, t_button *btn)
 {
 	int	x;
 	int	y;
-	int dif_x;
+	int	dif_x;
 
 	mlx_mouse_get_pos(img->win, &x, &y);
 	if (!btn->ctrl)
 	{
 		mlx_mouse_hide();
-		// printf("mouse move x=%d y=%d\n", x, y);
 		dif_x = x - img->p->res_x / 2;
 		img->plr->ind_v += dif_x * PLR_ROTATE_SPEED / 2;
 		if (img->plr->ind_v >= img->p->cnt_v)
@@ -40,5 +39,4 @@ void	mouse_move(t_data *img, t_button *btn)
 	}
 	else
 		mlx_mouse_show();
-
 }

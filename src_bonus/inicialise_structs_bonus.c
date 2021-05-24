@@ -52,5 +52,3 @@ void	initialise_bonuses(t_data *img)
 	img->plr->i_mmap = 1;
 	img->plr->i_torch = 0;
 }
-
-

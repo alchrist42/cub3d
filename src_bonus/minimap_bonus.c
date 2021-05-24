@@ -51,9 +51,9 @@ void	draw_player(t_param *p, t_data *img)
 	int	row;
 	int	col;
 	int	i;
-	int j;
-	int m;
-	
+	int	j;
+	int	m;
+
 	row = img->plr->y * p->mmap_y / p->h_map;
 	col = img->plr->x * p->mmap_x / p->w_map;
 	i = -3;
@@ -65,7 +65,8 @@ void	draw_player(t_param *p, t_data *img)
 			my_mlx_pixel_put(img, row + i, col + j, CLR_PLR);
 			m = 0;
 			while (++m < p->mmap_dst)
-				p->mmap[ft_min(p->mmap_len, ft_max(0, p->mmap_x * (row + m * i) + col + m * j))] = 1;
+				p->mmap[ft_min(p->mmap_len, ft_max(0,
+							p->mmap_x * (row + m * i) + col + m * j))] = 1;
 		}
 	}
 }
@@ -77,10 +78,8 @@ void	create_mini_map(t_data *img, t_param *p)
 	p->mmap_len = p->mmap_x * p->mmap_y;
 	p->mmap_dst = p->mmap_x / p->w_map * 1.4;
 	p->mmap = ft_calloc(p->mmap_len, sizeof(*p->mmap));
-	if(!p->mmap)
+	if (!p->mmap)
 		ft_raise_error("Cann't allocation memory for minimap\n");
-	
-	
 }
 
 void	draw_ray_mmap(t_data *img, t_dot *dot)

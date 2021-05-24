@@ -252,7 +252,6 @@ void	check_and_change(char **map, t_player *plr, float row, float col);
 void	rotate_view(t_param *p, t_player *plr, t_button *btn);
 void	mouse_move(t_data *img, t_button *btn);
 
-
 // save.c
 void	ft_put_int(unsigned char *ch, int x);
 void	ft_bmp_header(t_data *img, int fd, int size);

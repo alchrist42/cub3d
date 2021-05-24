@@ -82,6 +82,6 @@ void	get_textures(t_data *img, t_texture *xpm, t_param *p)
 			ft_raise_error("Cannot read texture file\n");
 		else
 			xpm[i].addr = mlx_get_data_addr(xpm[i].img, &xpm[i].bpp,
-				&xpm[i].llen, &xpm[i].end);
+					&xpm[i].llen, &xpm[i].end);
 	}
 }

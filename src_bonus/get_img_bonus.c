@@ -24,7 +24,9 @@ void	draw_walls(t_param *p, t_data *img)
 		i = img->plr->cnt_s;
 		img->plr->sprite[i - 1].h /= k;
 		while (i--)
-			img->plr->sprite[i].shad_k = img->plr->shadow_gl * img->plr->sprite[i].h * img->plr->sprite[i].h / p->res_y / p->res_y;
+			img->plr->sprite[i].shad_k = img->plr->shadow_gl
+				* img->plr->sprite[i].h * img->plr->sprite[i].h
+				/ p->res_y / p->res_y;
 		put_column(img, img->plr->sprite, col, img->plr->cnt_s);
 		col++;
 	}
@@ -95,5 +97,6 @@ int	ft_shadow(t_data *img, int color, int ind)
 	g = color >> 8;
 	b = color;
 	k = img->plr->sprite[ind].shad_k;
-	return (create_trgb(0, ft_min(r, 1.3 * r * k), ft_min(g * 0.8, g * k), ft_min(b * 0.8, b * k)));
+	return (create_trgb(0, ft_min(r, 1.3 * r * k),
+			ft_min(g * 0.8, g * k), ft_min(b * 0.8, b * k)));
 }
