@@ -17,7 +17,7 @@ void	check_line_map(char *s, t_param *p)
 	i = 0;
 	while (s[i])
 	{
-		if (!char_in_str(s[i], " 012NEWS"))
+		if (!char_in_str(s[i], " 0123456789NEWS"))
 			ft_raise_error("Bad character in the map\n");
 		if (char_in_str(s[i], "NEWS"))
 		{

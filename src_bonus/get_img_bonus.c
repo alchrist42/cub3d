@@ -22,11 +22,9 @@ void	draw_walls(t_param *p, t_data *img)
 		throw_ray(img, img->v[start_ind + col]);
 		k = img->v[ft_abs(p->res_x / 2 - col)].x;
 		i = img->plr->cnt_s;
+		img->plr->sprite[i - 1].h /= k;
 		while (i--)
-		{
-			img->plr->sprite[i].h /= k;
 			img->plr->sprite[i].shad_k = img->plr->shadow_gl * img->plr->sprite[i].h * img->plr->sprite[i].h / p->res_y / p->res_y;
-		}
 		put_column(img, img->plr->sprite, col, img->plr->cnt_s);
 		col++;
 	}

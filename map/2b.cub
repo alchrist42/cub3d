@@ -5,7 +5,7 @@ WE ./textures/wall2v.xpm
 EA ./textures/wall2v.xpm
 S ./textures2/torch_i.xpm
 F  5,5,5 
-C  22,15,15
+C  22,O5,O5
 
 OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 O...O....O..........O.......W......OOOOOOO....OOO.....O...OO
